@@ -26,7 +26,6 @@ try {
     die("connection failed: " . $e->getMessage());
 }
 
-echo "evren";
 /*else{
     echo "Connected sucessfully";
 }*/
