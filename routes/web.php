@@ -11,6 +11,18 @@
 |
 */
 
+//php artisan serve --port=80
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/test', function()
+{
+   return 'lol';
+});
+
+Route::resource('my', 'TestController');
+
