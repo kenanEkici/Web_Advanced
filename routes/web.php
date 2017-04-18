@@ -35,8 +35,6 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/events', 'EventController@showAll');
 
-
-
     Route::get('/users/data/crud', function(){
         $repo = new Repositories\UserRepository();
         return view('home', ['userList' => $repo->getAll()]);
@@ -46,8 +44,6 @@ Route::group(['middleware' => 'web'], function () {
         $repo = new Repositories\EventRepository();
         return view('login', ['eventList' => $repo->getAll()]);
     });
-
-
 
 });
 
