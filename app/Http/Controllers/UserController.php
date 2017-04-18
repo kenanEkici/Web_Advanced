@@ -3,33 +3,50 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\User;
+use App\Http\Repositories\UserRepository;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
-    public function index()
+    protected $users;
+
+    public function __construct(UserRepository $users)
     {
-        return User::all();
+        $this->users = $users;
     }
 
     public function store(Request $request)
     {
-        User::create($request->all());
+        $this->users->store($request->all());
     }
 
-    public function show($id)
+    public function showById($id)
     {
-        return User::where('event_id', $id)->get();
+        return $this->users->getById($id);
     }
 
-    public function update(Request $request, $id)
+    public function showAll()
     {
-        echo 'update';
+        return $this->users->getAll();
     }
 
-    public function destroy($id)
+    public function showByUsername($username)
     {
-        Event::where('event_id',$id)->destroy();
+        return $this->users->getByName($username);
+    }
+
+    public function update(Request $request)
+    {
+        $this->users->edit($request->input('user_id'),$request->all());
+    }
+
+    public function destroy(Request $request)
+    {
+        $this->users->delete($request->input('user_id'));
+    }
+
+    public function assign(Request $request)
+    {
+        $this->users->assignUserToEvent($request->input('username'),$request->input('event_id'));
     }
 }

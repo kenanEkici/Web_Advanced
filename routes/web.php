@@ -17,7 +17,6 @@
 use App\User;
 use App\Event;
 use App\Http\Repositories;
-use App\Http\Controllers\UserController;
 
 Route::group(['middleware' => 'web'], function () {
 
@@ -26,20 +25,30 @@ Route::group(['middleware' => 'web'], function () {
         return view('welcome');
     });
 
-    Route::get('/users', function () {
+    Route::get('/users', 'UserController@showAll');
+    Route::get('/users/{id}', 'UserController@showById')->where('id', '[0-9]+');
+    Route::get('/users/{name}', 'UserController@showByUsername')->where('name', '[A-Za-z]\w+');
+
+    Route::put('/users', 'UserController@update');
+    Route::post('/users', 'UserController@store');
+    Route::delete('/users','UserController@destroy');
+
+    Route::get('/events', 'EventController@showAll');
+
+
+
+    Route::get('/users/data/crud', function(){
         $repo = new Repositories\UserRepository();
         return view('home', ['userList' => $repo->getAll()]);
     });
 
-    Route::post('/users','UserController@store', function () {
-        $repo = new Repositories\UserRepository();
-        return view('home', ['userList' => $repo->getAll()]);
-    });
-
-    Route::get('/events', function () {
+    Route::get('/events/data/crud', function () {
         $repo = new Repositories\EventRepository();
         return view('login', ['eventList' => $repo->getAll()]);
     });
+
+
+
 });
 
 

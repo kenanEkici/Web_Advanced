@@ -4,31 +4,45 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use Illuminate\Http\Request;
+use App\Http\Repositories\EventRepository;
 
 class EventController extends Controller
 {
-    public function index()
+
+    protected $events;
+
+    public function __construct(EventRepository $events)
     {
-        return Event::all();
+        $this->events = $events;
     }
 
     public function store(Request $request)
     {
-        Event::create($request->all());
+        $this->events->store($request->all());
     }
 
-    public function show($id)
+    public function showById($id)
     {
-        return Event::where('event_id', $id)->get();
+        return $this->events->getById($id);
     }
 
-    public function update(Request $request, $id)
+    public function showAll()
     {
-        echo 'update';
+        return $this->events->getAll();
+    }
+
+    public function showByUsername($name)
+    {
+        return $this->events->getByName($name);
+    }
+
+    public function update(Request $request)
+    {
+        $this->events->edit($request->all(), $request->input('event_id'));
     }
 
     public function destroy($id)
     {
-        Event::where('event_id',$id)->destroy();
+        $this->events->delete($id);
     }
 }

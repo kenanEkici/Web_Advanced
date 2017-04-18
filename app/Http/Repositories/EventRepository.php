@@ -10,7 +10,7 @@ namespace App\Http\Repositories;
 use App\Event;
 
 
-class EventRepository
+class EventRepository implements IRepository
 {
     public function getAll()
     {
@@ -22,18 +22,28 @@ class EventRepository
         return Event::where('event_id', $id)->get();
     }
 
-    public function create(Array $array)
+    function getByName($name)
+    {
+        return Event::where('username', $name)->get();
+    }
+
+    function store($array)
     {
         return Event::create($array);
     }
 
-    public function update(Request $request, $id)
+    function edit($new, $old_id)
     {
-        echo 'update';
+        Event::where('event_id', $old_id)->update($new);
     }
 
-    public function destroy($id)
+    function delete($id)
     {
-        Event::where('event_id',$id)->destroy();
+        Event::where('event_id',$id)->delete();
+    }
+
+    public function assignUserToEvent($event_id, $username)
+    {
+        // TODO: Implement assignUserToEvent() method.
     }
 }

@@ -7,8 +7,9 @@
  */
 namespace App\Http\Repositories;
 use App\User;
+use App\Event;
 
-class UserRepository
+class UserRepository implements IRepository
 {
     public function getAll()
     {
@@ -20,18 +21,30 @@ class UserRepository
         return User::where('user_id', $id)->get();
     }
 
-    public function create(Array $array)
+    public function assignUserToEvent($username,$event_id)
+    {
+       $user = User::where('username', $username)->get();
+       $event = Event::where('event_id', $event_id)->get();
+       $user->events()->attach($event);
+    }
+
+    public function getByName($name)
+    {
+        return User::where('username', $name)->get();
+    }
+
+    public function store($array)
     {
         return User::create($array);
     }
 
-    public function update(Request $request, $id)
+    public function edit($id, $newData)
     {
-        echo 'update';
+        return User::where('user_id', $id)->update($newData);
     }
 
-    public function destroy($id)
+    public function delete($user_id)
     {
-        User::where('user_id',$id)->destroy();
+        User::where('user_id',$user_id)->delete();
     }
 }
