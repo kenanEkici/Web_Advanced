@@ -98,7 +98,7 @@ function post(updateOrCreate,id)
             role: $("#role").val(),
             address: $("#address").val()
         };
-        alert(JSON.stringify(user))
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

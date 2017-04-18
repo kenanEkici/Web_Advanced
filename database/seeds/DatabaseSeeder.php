@@ -44,8 +44,8 @@ class appSeeder extends Seeder
         $Cameraman = User::create(array('username' =>'CameraGuy', 'hash' => 'pass',
             'first_name' => 'Camera', 'last_name' => 'Guy', 'role' => 'intern_employee', 'address'=>'Heusden'));
 
-        $Meeting = Event::create(array('start_date' => date_create("2017-07-20 16:20:00"),
-            'end_date' => date_create("2017-07-20 20:00:00"),'location' => "Hasselt"));
+        $Meeting = Event::create(array('start_date' => date_create("2017-07-20 16:20:00"), 'organiser' =>$CEO->first_name ." ". $CEO->last_name, 'title' => 'Meeting',
+            'description' => 'Voor alle werknemers', 'end_date' => date_create("2017-07-20 20:00:00"),'location' => "Hasselt", 'invited'=>''));
 
         $CEO->events()->attach($Meeting);
         $Cameraman->events()->attach($Meeting);

@@ -22,9 +22,9 @@ class EventRepository implements IRepository
         return Event::where('event_id', $id)->get();
     }
 
-    function getByName($name)
+    function getByName($title)
     {
-        return Event::where('username', $name)->get();
+        return Event::where('title', $title)->get();
     }
 
     function store($array)
@@ -32,9 +32,9 @@ class EventRepository implements IRepository
         return Event::create($array);
     }
 
-    function edit($new, $old_id)
+    function edit($id, $newData)
     {
-        Event::where('event_id', $old_id)->update($new);
+        Event::where('event_id', $id)->update($newData);
     }
 
     function delete($id)

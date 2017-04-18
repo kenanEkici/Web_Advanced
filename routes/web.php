@@ -34,15 +34,22 @@ Route::group(['middleware' => 'web'], function () {
     Route::delete('/users','UserController@destroy');
 
     Route::get('/events', 'EventController@showAll');
+    Route::get('/events/{id}', 'EventController@showById')->where('id', '[0-9]+');
+    Route::get('/events/{name}', 'EventController@showByTitle')->where('name', '[A-Za-z]\w+');
+
+    Route::put('/events', 'EventController@update');
+    Route::post('/events', 'EventController@store');
+    Route::delete('/events','EventController@destroy');
+
 
     Route::get('/users/data/crud', function(){
         $repo = new Repositories\UserRepository();
-        return view('home', ['userList' => $repo->getAll()]);
+        return view('UsersCrud', ['userList' => $repo->getAll()]);
     });
 
     Route::get('/events/data/crud', function () {
         $repo = new Repositories\EventRepository();
-        return view('login', ['eventList' => $repo->getAll()]);
+        return view('EventsCrud', ['eventList' => $repo->getAll()]);
     });
 
 });

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
     //
-    protected $fillable = array('start_date', 'end_date','location');
+    protected $fillable = array('organiser','title','description','start_date', 'end_date','location', 'invited');
 
     public $timestamps = false;
 

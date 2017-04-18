@@ -31,18 +31,18 @@ class EventController extends Controller
         return $this->events->getAll();
     }
 
-    public function showByUsername($name)
+    public function showByTitle($title)
     {
-        return $this->events->getByName($name);
+        return $this->events->getByName($title);
     }
 
     public function update(Request $request)
     {
-        $this->events->edit($request->all(), $request->input('event_id'));
+        $this->events->edit($request->input('event_id'),$request->all());
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $this->events->delete($id);
+        $this->events->delete($request->input('event_id'));
     }
 }
