@@ -9,7 +9,7 @@
 namespace App\Http\Repositories;
 use App\Event;
 
-
+//repository for querying data with eloquent
 class EventRepository implements IRepository
 {
     public function getAll()

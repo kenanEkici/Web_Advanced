@@ -6,9 +6,9 @@
  * Time: 13:55
  */
 
-namespace app\Http\Repositories;
+namespace App\Http\Repositories;
 
-
+//for dependency injection (not injected yet only implemented)
 interface IRepository
 {
     public function getAll();

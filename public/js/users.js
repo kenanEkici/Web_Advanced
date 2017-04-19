@@ -2,6 +2,7 @@
  * Created by Kenan on 18/04/2017.
  */
 
+//delete user by ID
 function deleteUser(id)
 {
     $.ajaxSetup({
@@ -26,6 +27,7 @@ function deleteUser(id)
     });
 }
 
+//Check if data is the same, return true
 function checkData()
 {
     $.ajax({
@@ -50,11 +52,13 @@ function checkData()
     });
 }
 
+//raised by the send button on the blade view
 function postData()
 {
     checkData();
 }
 
+//update if false else create new entry
 function post(updateOrCreate,id)
 {
     if(updateOrCreate === true)

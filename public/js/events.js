@@ -5,6 +5,7 @@
  * Created by Kenan on 18/04/2017.
  */
 
+//delete event by given ID with AJAX
 function deleteEvent(id)
 {
     $.ajaxSetup({
@@ -29,6 +30,7 @@ function deleteEvent(id)
     });
 }
 
+//Check is the given data is the same and return true or false
 function checkData()
 {
     $.ajax({
@@ -64,11 +66,14 @@ function checkData()
     });
 }
 
+//Raised by the button on the view
 function postData()
 {
     checkData();
 }
 
+
+//if true, create a new entry else update entry
 function post(updateOrCreate,id)
 {
     if(updateOrCreate === true)

@@ -8,7 +8,6 @@ use App\Http\Repositories\EventRepository;
 
 class EventController extends Controller
 {
-
     protected $events;
 
     public function __construct(EventRepository $events)
