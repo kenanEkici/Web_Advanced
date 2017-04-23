@@ -12,7 +12,30 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::group(['middleware' => 'role'], function () {
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    //GET routes --> controllers for JSON user output
+    Route::get('/users', 'UserController@showAll');
+    Route::get('/users/{id}', 'UserController@showById')->where('id', '[0-9]+');
+    Route::get('/users/{name}', 'UserController@showByUsername')->where('name', '[A-Za-z]\w+');
+
+    //POST/UPDATE/DELETE routes --> controllers for JSON user controls
+    Route::put('/users', 'UserController@update');
+    Route::delete('/users', 'UserController@destroy');
+
+    //GET routes --> controllers for JSON event output
+    Route::get('/events', 'EventController@showAll');
+    Route::get('/events/{id}', 'EventController@showById')->where('id', '[0-9]+');
+    Route::get('/events/{name}', 'EventController@showByTitle')->where('name', '[A-Za-z]\w+');
+
+    //POST/UPDATE/DELETE routes --> controllers for JSON event output
+    Route::put('/events', 'EventController@update');
+    Route::post('/events', 'EventController@store');
+    Route::delete('/events', 'EventController@destroy');
+
+    Route::get('/sessionData', 'UserController@getDecryptedCookie');
 });
+
+Route::post('/register/user', 'UserController@store');
+Route::post('/login', 'UserController@login');
+Route::post('/logout', 'UserController@logout');

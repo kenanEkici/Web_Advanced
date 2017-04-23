@@ -14,7 +14,7 @@
 </head>
 <body>
 
-{{ HTML::style('css/login.css') }}
+{{ HTML::style('css/magicLayout.css') }}
 
 <table id="table">
     <div class="table-title">

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Redirect;
 
-class RoleMiddleware
+class CheckSession
 {
     /**
      * Handle an incoming request.
@@ -14,17 +14,16 @@ class RoleMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-
     public function handle($request, Closure $next)
     {
-        if ($request->cookies->has('sessionId')) //check if authorised
+        if($request->cookies->has('sessionId')) //check if user has a session_id
         {
             return $next($request);
         }
-        else
+        else // if not then redirect to login page
         {
             $urlToAccess = $request->url();
-            return Redirect::to('/login')->with('errorAuthorisation', $urlToAccess);
+            return Redirect::to('/login')->with('errorNotLoggedIn', $urlToAccess);
         }
     }
 }

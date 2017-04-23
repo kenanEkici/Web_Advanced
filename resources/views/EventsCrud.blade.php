@@ -13,7 +13,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 </head>
 <body>
-{{ HTML::style('css/login.css') }}
+{{ HTML::style('magicLayout.css') }}
 <div class="table-title">
     <h3>Events</h3>
 </div>
