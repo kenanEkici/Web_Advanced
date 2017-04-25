@@ -33,7 +33,7 @@ class UserController extends Controller
             if ($user->hash === $password)
             {
                 $response = new Response("pass");
-                return $response->cookie('sessionId', encrypt($user->user_id . $user->role), 60);
+                return $response->cookie('sessionId', encrypt($user->user_id . '_' . $user->role), 60);
             }
         }
         return "failed";
