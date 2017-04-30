@@ -1,7 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Kenan
- * Date: 21/04/2017
- * Time: 12:44
- */
+@extends('master user.Layout')
+@section('generateScript')
+    <script  src="{!! asset('js/views/generateMyEvents.js') !!}"></script>
+@stop

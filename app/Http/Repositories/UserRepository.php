@@ -62,4 +62,9 @@ class UserRepository implements IRepository
             return null;
         }
     }
+
+    public function index($searchKey)
+    {
+        return User::where('first_name', 'like', $searchKey.'%')->get();
+    }
 }

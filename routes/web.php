@@ -14,22 +14,29 @@
 //php artisan serve --port=80
 // to run
 
-
+//only for users that have a session_id thus are logged in
 Route::group(['middleware' => 'session'], function () {
 
-    //only for users that have a session_id thus are logged in
+    //wrap another middleware group to return master user page
+    //the javascript returned with the specific master user page will
+    //determine which data the user will retrieve
 
     Route::get('/home', function()
     {
         return view('Homepage');
     });
 
-    Route::get('/home/events', function()
+    Route::get('/events', function()
     {
         return view('MyEvents');
     });
 
-    Route::get('/home/profile', function()
+    Route::get('/agenda', function()
+    {
+        return view('Agenda');
+    });
+
+    Route::get('/profile', function()
     {
         return view('MyProfile');
     });
@@ -48,7 +55,7 @@ Route::get('/login', function()
 
 Route::get('/', function()
 {
-    return view('IndexHomepage');
+    return view('Index');
 });
 
 

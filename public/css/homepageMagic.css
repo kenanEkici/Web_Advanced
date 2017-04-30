@@ -178,6 +178,19 @@ input[type="text"]
     width: 100%;
     font-family: Roboto;
 }
+
+select
+{
+    width:100%;
+    font-family: Roboto;
+}
+
+input[type="search"]
+{
+    width: 100%;
+    font-family: Roboto;
+}
+
 input[type="button"]
 {
     width: 100%;

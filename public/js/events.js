@@ -110,37 +110,7 @@ function post(updateOrCreate,id)
         });
     }
     else {
-        var event = {
-            event_id:id,
-            organiser: $("#organiser").val(),
-            title: $("#title").val(),
-            description: $("#description").val(),
-            start_date: $("#start").val(),
-            end_date: $("#end").val(),
-            location: $("#location").val(),
-            invited: $("#invited").val()
-        };
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $.ajax({
-            type: 'PUT',
-            url: "/events",
-            data: event,
-            beforeSend: function() {
-
-            },
-            success: function(data) {
-                alert("event updated! ")
-            },
-            error: function(xhr, textStatus, thrownError) {
-                alert('foutje');
-            }
-        });
     }
 
 

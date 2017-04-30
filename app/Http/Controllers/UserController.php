@@ -78,4 +78,9 @@ class UserController extends Controller
     {
         $this->users->assignUserToEvent($request->input('username'),$request->input('event_id'));
     }
+
+    public function searchByIndex($searchKey)
+    {
+        return $this->users->index($searchKey);
+    }
 }

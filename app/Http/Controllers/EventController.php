@@ -30,9 +30,9 @@ class EventController extends Controller
         return $this->events->getAll();
     }
 
-    public function showByTitle($title)
+    public function showByUser($username)
     {
-        return $this->events->getByName($title);
+        return $this->events->getByName($username);
     }
 
     public function update(Request $request)

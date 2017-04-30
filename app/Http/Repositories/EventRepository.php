@@ -24,7 +24,7 @@ class EventRepository implements IRepository
 
     function getByName($title)
     {
-        return Event::where('title', $title)->get();
+        return Event::where('invited', 'like','%'.$title.'%')->get();
     }
 
     function store($array)
@@ -42,8 +42,13 @@ class EventRepository implements IRepository
         Event::where('event_id',$id)->delete();
     }
 
-    public function assignUserToEvent($event_id, $username)
+    public function searchByIndex($searchKey)
     {
-        // TODO: Implement assignUserToEvent() method.
+        // TODO: Implement searchByIndex() method.
+    }
+
+    public function index($searchKey)
+    {
+        // TODO: Implement index() method.
     }
 }
