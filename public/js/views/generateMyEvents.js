@@ -83,10 +83,11 @@ function findReference(searchkey)
             {
                 $('#resultBoxQuery').show();
                 $('#resultBoxQuery').empty();
-                var resultBar = $('<select style="display:inline-block; vertical-align:top; overflow:hidden; border:solid grey 1px; " size=' +data.length+'></select>');
+                var resultBar = $('<select id="coWorkersList" onclick="changeList()" style="display:inline-block; vertical-align:top; overflow:hidden; border:solid grey 1px; " size=' +data.length+'></select>');
+
                 for(var i =0; i< data.length; i++)
                 {
-                    resultBar.append($("<option onclick='addToCoWorkerList(this.value,this.id)' id=" + data[i].username+ ">" + data[i].first_name + ' ' + data[i].last_name + '</option>'));
+                    resultBar.append($("<option id=" + data[i].username+ ">" + data[i].first_name + ' ' + data[i].last_name + '</option>'));
                 }
                 $('#resultBoxQuery').append(resultBar);
             }
@@ -101,11 +102,12 @@ function findReference(searchkey)
     });
 }
 
-function addToCoWorkerList(value,id)
-{
+function changeList() {
+    var id = $("#coWorkersList").find('option:selected').attr('id');
+    var value = $("#coWorkersList").find('option:selected').text();
     $('#resultBoxQuery').hide();
-    $('#listInvited').append('<li id=' + value +'>'+id+"\n"+'</li>');
-}
+    $('#listInvited').append('<li id='+id+'>'+value+'\n'+'</li>');
+};
 
 function emptyView()
 {
