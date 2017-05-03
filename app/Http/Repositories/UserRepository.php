@@ -19,14 +19,7 @@ class UserRepository implements IRepository
 
     public function getById($id)
     {
-        return User::where('user_id', $id)->first();
-    }
-
-    public function assignUserToEvent($username,$event_id)
-    {
-       $user = User::where('username', $username)->get();
-       $event = Event::where('event_id', $event_id)->get();
-       $user->events()->attach($event);
+        return User::where('id', $id)->first();
     }
 
     public function getByName($name)
@@ -34,7 +27,7 @@ class UserRepository implements IRepository
         return User::where('username', $name)->first();
     }
 
-    public function store($array)
+    public function store($array,$users)
     {
         return User::create($array);
     }
@@ -43,7 +36,7 @@ class UserRepository implements IRepository
     {
         if ($this->getById($id) !== null)
         {
-            return User::where('user_id', $id)->update($newData);
+            return User::where('id', $id)->update($newData);
         }
         else
         {
@@ -55,7 +48,7 @@ class UserRepository implements IRepository
     {
         if ($this->getById($user_id) !== null)
         {
-            User::where('user_id',$user_id)->delete();
+            User::where('id',$user_id)->delete();
         }
         else
         {

@@ -8,6 +8,7 @@
 
 namespace App\Http\Repositories;
 use App\Event;
+use App\User;
 
 //repository for querying data with eloquent
 class EventRepository implements IRepository
@@ -19,32 +20,36 @@ class EventRepository implements IRepository
 
     public function getById($id)
     {
-        return Event::where('event_id', $id)->get();
+        return Event::where('id', $id)->get();
     }
 
     function getByName($title)
     {
-        return Event::where('invited', 'like','%'.$title.'%')->get();
+        return User::where('username',$title)->first()->events()->get();
     }
 
-    function store($array)
+    //  create new event   <--- event (has an array of users)
+    function store($array, $users)
     {
-        return Event::create($array);
+        $event = Event::create($array);
+        $userAr = explode('$', $users);
+
+        for ($i = 0; $i < count($userAr)-1; $i++)
+        {
+            $user = User::where('username', $userAr[$i])->first();
+            $event->users()->attach($user);
+        }
+        return $event;
     }
 
     function edit($id, $newData)
     {
-        Event::where('event_id', $id)->update($newData);
+        Event::where('id', $id)->update($newData);
     }
 
     function delete($id)
     {
-        Event::where('event_id',$id)->delete();
-    }
-
-    public function searchByIndex($searchKey)
-    {
-        // TODO: Implement searchByIndex() method.
+        Event::where('id',$id)->delete();
     }
 
     public function index($searchKey)

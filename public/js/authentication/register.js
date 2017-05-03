@@ -11,13 +11,11 @@ function openRegister()
 {
     if (opened)
     {
-
         closeRegister();
         $('#register').val("Register");
     }
     else
     {
-
         opened=true;
         $('html, body').animate({ scrollTop: 500});
         $('#register').val("Close register");
@@ -26,6 +24,7 @@ function openRegister()
             "<span>Username</span> <input id='usernameFrm' type='text'>  <br>  <span>Password</span> <input id='passwordFrm' type='password'><br>"
             + " <span>First name</span> <input id='firstNameInput' type='text'><br><span>Last name</span> <input id='lastNameInput' type='text'><br> <span>Department</span> <select id='optionFrm'><option>CEO</option><option>Administration</option><option>Accounting</option><option>Entertainment</option><option>Recreation</option><option>Admin</option></select><br>"
             +"<br>  <span>Address</span> <input type='text' id='address'>  <br><input onclick='registerUser()' type='button' value='Register'> </form>")
+
 
     }
 }
@@ -40,6 +39,7 @@ function registerUser()
         role: $("#optionFrm").val(),
         address: $("#address").val()
     };
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -54,9 +54,12 @@ function registerUser()
             alert("gebruiker toegevoegd!")
             username = $("#usernameFrm").val();
             password = $("#passwordFrm").val();
-            $('#container').replaceWith(copyForm);
+
+            closeRegister();
+
             $('#usernameInput').val(username);
             $('#passwordInput').val(password);
+            $('#register').val("Register");
         },
         error: function(xhr, textStatus, thrownError) {
             alert('fout met het posten naar api/register/user');
@@ -69,3 +72,6 @@ function closeRegister()
     $('#container').replaceWith(copyForm);
     opened=false;
 }
+
+
+

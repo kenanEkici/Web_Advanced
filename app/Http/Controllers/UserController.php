@@ -33,7 +33,7 @@ class UserController extends Controller
             if ($user->hash === $password)
             {
                 $response = new Response("pass");
-                return $response->cookie('sessionId', encrypt($user->user_id . '_' . $user->role), 60);
+                return $response->cookie('sessionId', encrypt($user->id), 60);
             }
         }
         return "failed";
@@ -44,9 +44,42 @@ class UserController extends Controller
         return Redirect::to('/login')->withCookie(\Cookie::forget('sessionId'));
     }
 
+    //server side validation
     public function store(Request $request)
     {
-        $this->users->store($request->all());
+        //$validation = false;
+//
+//        if (strlen($request->input('username')) > 6) //langer dan 6 karakters
+//        {
+//            if (strlen($request->input('hash')) > 6) //langer dan 6 karakters
+//            {
+//                if (strlen($request->input('first_name')) > 2 ) //niet leeg
+//                {
+//                    if (strlen($request->input('last_name')) > 2 ) //niet leeg
+//                    {
+//                        if (strlen($request->input('role'))> 2 ) //niet leeg
+//                        {
+//                            if (strlen($request->input('address')) > 2 ) //niet leeg
+//                            {
+//                                $validation = true;
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        if ($validation == true)
+//        {
+//            $this->users->store($request->all());
+//        }
+//        else
+//        {
+//            return $validation+"";
+//        }
+        $this->users->store($request->all(),null);
+//        return response()->json(['name' => $validation]);
+
     }
 
     public function showById($id)
@@ -66,18 +99,14 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        $this->users->edit($request->input('user_id'),$request->all());
+        $this->users->edit($request->input('id'),$request->all());
     }
 
     public function destroy(Request $request)
     {
-        $this->users->delete($request->input('user_id'));
+        $this->users->delete($request->input('id'));
     }
 
-    public function assign(Request $request)
-    {
-        $this->users->assignUserToEvent($request->input('username'),$request->input('event_id'));
-    }
 
     public function searchByIndex($searchKey)
     {

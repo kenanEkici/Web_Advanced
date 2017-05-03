@@ -11,7 +11,7 @@ class Event extends Model
 
     public $timestamps = false;
 
-    public function events() {
+    public function users() {
         return $this->belongsToMany('App\User', 'users_events', 'event_id', 'user_id');
     }
 

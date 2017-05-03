@@ -4,47 +4,13 @@
 
 //---------------------------SESSION VARIABLES
 
-var sessionData;
 var userData;
-var userEvents;
-var allEvents;
 
-// main
-
-loadSessionData(); //page refresh
-
-//----------------------------GET SESSION DATA (first thing that happens when the page loads)
-//------------------------- AJAX CALL Functions to load user data (only happens at page refresh)
-
-function loadSessionData() {
-    $.ajax({
-        type: 'GET',
-        url: 'api/sessionData',
-        success: function (data) //after the session data is loaded
-        {
-            sessionData = data.split('_'); //session data is the userID and role
-            getCurrentUser();
-        }
-    });
-}
-
-function setWelcomeText(data)
+loadSessionData(function(data)
 {
-    $('#welcomeText').text("Welkom " + data);
-}
-
-function getCurrentUser()
-{
-    $.ajax({
-        type: 'GET',
-        url: 'api/users/' + sessionData[0],
-        success: function (data) { // after user data is loaded
-            userData = data;
-            $('#loader').hide();
-            generateHomeView();
-        }
-    });
-}
+    userData = data;
+    generateHomeView();
+});
 
 function generateHomeView()
 {
@@ -54,6 +20,12 @@ function generateHomeView()
     $('.content .container').append(new_item);
     setWelcomeText(userData.username);
     new_item.show('normal');
+    $('#loader').hide();
+}
+
+function setWelcomeText(data)
+{
+    $('#welcomeText').text("Welkom " + data);
 }
 
 function animateNav(id)
@@ -67,10 +39,6 @@ function deanimateNav(id)
     $('#nav'+id).animate({height:'55px'});
 }
 
-function emptyView()
-{
-    $('.content .container').empty();
-}
 
 
 

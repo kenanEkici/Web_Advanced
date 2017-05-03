@@ -17,7 +17,7 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        $this->events->store($request->all());
+        return $this->events->store($request->all(), $request->input('invited'));
     }
 
     public function showById($id)
@@ -37,11 +37,11 @@ class EventController extends Controller
 
     public function update(Request $request)
     {
-        $this->events->edit($request->input('event_id'),$request->all());
+        $this->events->edit($request->input('id'),$request->all());
     }
 
     public function destroy(Request $request)
     {
-        $this->events->delete($request->input('event_id'));
+        $this->events->delete($request->input('id'));
     }
 }

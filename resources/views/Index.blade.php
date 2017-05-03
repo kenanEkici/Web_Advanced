@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
-<body style="background-image: url({{asset('images/wallpaper2.jpg')}});">
+<body >
 
 {{ HTML::style('css/indexMagic.css') }}
 
@@ -19,7 +19,6 @@
 <div class="container">
     <div id="row2">
         <input onclick="location.href='/login'" type="button" value="Login/Register">
-        {{--{{ HTML::image('images/wallpaper2.jpg', 'a picture', array('class' => 'images')) }}--}}
     </div>
 </div>
 </body>

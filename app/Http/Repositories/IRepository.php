@@ -15,7 +15,7 @@ interface IRepository
     public function getById($id);
     public function getByName($name);
     public function index($searchKey);
-    public function store($array);
+    public function store($array,$users);
     public function edit($new, $old_id);
     public function delete($id);
 }

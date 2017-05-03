@@ -2,10 +2,13 @@
  * Created by Kenan on 29/04/2017.
  */
 
-var sessionData;
 var userData;
 
-loadSessionData();
+loadSessionData(function(data)
+{
+    userData = data;
+    openEventWindow()
+});
 
 function openEventWindow()
 {
@@ -16,15 +19,10 @@ function openEventWindow()
         success:function(data)
         {
             userEvents = data;
-            allPersonalEventDataLoaded();
+            generateEventView();
+            $('#loader').hide();
         }
     });
-}
-
-function allPersonalEventDataLoaded()
-{
-    generateEventView();
-    $('#loader').hide();
 }
 
 function setAmountEventText(data)
@@ -50,7 +48,7 @@ function generateEventView()
             {
                 select.append('<option>'+listOfWorkers[j]+'</option>')
             }
-            $(".table").append($("<div class='row'> <div class='cell'>"+userEvents[i].organiser+"</div><div class='cell'>"+userEvents[i].title+"</div><div class='cell'>"+userEvents[i].description+"</div><div class='cell'>"+userEvents[i].start_date+"</div><div class='cell'>"+userEvents[i].end_date+"</div><div class='cell'>"+userEvents[i].location+"</div><div id=row"+i+" class='cell'></div><div class='cell'><img id="+userEvents[i].event_id+"+ onclick='deleteEvent(this.id)' class='deleteButton' src='../../images/trash.png'></div></div>"));
+            $(".table").append($("<div class='row'> <div class='cell'>"+userEvents[i].organiser+"</div><div class='cell'>"+userEvents[i].title+"</div><div class='cell'>"+userEvents[i].description+"</div><div class='cell'>"+userEvents[i].start_date+"</div><div class='cell'>"+userEvents[i].end_date+"</div><div class='cell'>"+userEvents[i].location+"</div><div id=row"+i+" class='cell'></div><div class='cell'><img id="+userEvents[i].id+"+ onclick='deleteEvent(this.id)' class='deleteButton' src='../../images/trash.png'></div></div>"));
             $("#row"+i).append(select);
         }
 
@@ -103,10 +101,9 @@ function findReference(searchkey)
 }
 
 function changeList() {
-    var id = $("#coWorkersList").find('option:selected').attr('id');
-    var value = $("#coWorkersList").find('option:selected').text();
+    var username = $("#coWorkersList").find('option:selected').attr('id');
     $('#resultBoxQuery').hide();
-    $('#listInvited').append('<li id='+id+'>'+value+'\n'+'</li>');
+    $('#listInvited').append('<li>'+username+'\n'+'</li>');
 };
 
 function emptyView()
@@ -121,7 +118,7 @@ function deleteEvent(id)
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    var obj = {event_id :id}
+    var obj = {id :id}
     $.ajax({
         type: 'DELETE',
         url: "api/events",
@@ -130,7 +127,6 @@ function deleteEvent(id)
 
         },
         success: function(data) {
-            loadedEvents = false;
             emptyView();
             openEventWindow();
         },
@@ -177,30 +173,3 @@ function postEvent()
         }
     });
 }
-
-function loadSessionData()
-{
-    $.ajax({
-        type: 'GET',
-        url: 'api/sessionData',
-        success: function (data) //after the session data is loaded
-        {
-            sessionData = data.split('_'); //session data is the userID and role
-            getCurrentUser();
-        }
-    });
-}
-
-function getCurrentUser()
-{
-    $.ajax({
-        type: 'GET',
-        url: 'api/users/' + sessionData[0],
-        success: function (data) { // after user data is loaded
-            userData = data;
-            $('#loader').hide();
-            openEventWindow();
-        }
-    });
-}
-

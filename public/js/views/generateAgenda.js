@@ -15,16 +15,43 @@ function openAgendaWindow()
         success:function(data)
         {
             userEvents = data;
-            allEventDataLoaded();
+            generateAgendaView();
+            $('#loader').hide();
             setAmountEventText(data);
         }
     });
 }
 
-function allEventDataLoaded()
+function deleteEvent(id)
 {
-    generateAgendaView();
-    $('#loader').hide();
+    $('#loader').show();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    var obj = {id :id}
+    $.ajax({
+        type: 'DELETE',
+        url: "api/events",
+        data: obj,
+        beforeSend: function() {
+
+        },
+        success: function(data) {
+            emptyView();
+            openAgendaWindow();
+        },
+        error: function(xhr, textStatus, thrownError) {
+            alert('Fout bij het verwijderen van event');
+        }
+    });
+}
+
+function emptyView()
+{
+    $('.content .container').empty();
 }
 
 function generateAgendaView()
@@ -40,7 +67,7 @@ function generateAgendaView()
         {
             select.append('<option>'+listOfWorkers[j]+'</option>')
         }
-        $(".table").append($("<div class='row'> <div class='cell'>"+userEvents[i].organiser+"</div><div class='cell'>"+userEvents[i].title+"</div><div class='cell'>"+userEvents[i].description+"</div><div class='cell'>"+userEvents[i].start_date+"</div><div class='cell'>"+userEvents[i].end_date+"</div><div class='cell'>"+userEvents[i].location+"</div><div id=row"+i+" class='cell'></div><div class='cell'><img id="+userEvents[i].event_id+"+ onclick='deleteEvent(this.id)' class='deleteButton' src='../../images/trash.png'></div></div>"));
+        $(".table").append($("<div class='row'> <div class='cell'>"+userEvents[i].organiser+"</div><div class='cell'>"+userEvents[i].title+"</div><div class='cell'>"+userEvents[i].description+"</div><div class='cell'>"+userEvents[i].start_date+"</div><div class='cell'>"+userEvents[i].end_date+"</div><div class='cell'>"+userEvents[i].location+"</div><div id=row"+i+" class='cell'></div><div class='cell'><img id="+userEvents[i].id+"+ onclick='deleteEvent(this.id)' class='deleteButton' src='../../images/trash.png'></div></div>"));
         $("#row"+i).append(select);
     }
 
