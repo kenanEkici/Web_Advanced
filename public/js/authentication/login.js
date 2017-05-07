@@ -1,8 +1,7 @@
 /**
  * Created by Kenan on 21/04/2017.
  */
-function login()
-{
+function login(){
     var username = $('#usernameInput').val();
 
     if (username !== "")
@@ -25,9 +24,8 @@ function login()
         $('#message').text("Please fill in your username");
     }
 }
+
 function handleURL(url){
-
-
     if (!$.trim(url.html()))
     {
         window.location.href = "/home";

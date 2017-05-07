@@ -5,40 +5,54 @@
 //---------------------------SESSION VARIABLES
 
 var userData;
+var amountOfPersonalEvents;
+var amountOfEventsInAgenda;
 
-loadSessionData(function(data)
-{
+loadSessionData(function(data){
     userData = data;
-    generateHomeView();
-});
+    $.ajax({
+        type:'GET',
+        url:'api/events/user/'+userData.username,
+        success:function(events)
+        {
+            amountOfPersonalEvents = events.length;
+            $.ajax({
+                type:'GET',
+                url:'api/events',
+                success:function(allEvents)
+                {
 
-function generateHomeView()
-{
-    var new_item = $("<h1 id='welcomeText'></h1> <div class='subContainer'>  <br> <h3 class='link' id='2' onmouseleave='deanimateNav(this.id)' onmouseenter='animateNav(this.id)'>Bekijk je evenementen of voeg een nieuwe evenement toe</h3>"
-        + "<h3 class='link' id='3' onmouseleave='deanimateNav(this.id)' onmouseenter='animateNav(this.id)'>Bekijk of wijzig uw profiel</h3>"
-        + "<h3 class='link' id='4' onmouseleave='deanimateNav(this.id)' onmouseenter='animateNav(this.id)'>Bekijk de agenda</h3></div>").hide();
-    $('.content .container').append(new_item);
+                    amountOfEventsInAgenda = allEvents.length;
+                    generateHomeView();
+                    $('#loader').hide();
+                }
+            });
+        }
+    });
+})
+
+function generateHomeView(){
+   var homeList = $('<h2 id="welcomeText"></h2><br>' +
+            '<ul class="list-group">' +
+            '<li class="list-group-item justify-content-between"><a href="/events"><span style="font-size: 15pt" >Bekijk je evenementen</span></a>' +
+            '<span class="badge badge-default badge-pill">'+amountOfPersonalEvents+'</span>' +
+            '</li>' +
+            '<li class="list-group-item justify-content-between"><a href="/profile"><span style="font-size: 15pt">Bekijk of wijzig uw profiel</span></a>' +
+            '</li>' +
+            '<li class="list-group-item justify-content-between"><a href="/agenda"><span style="font-size: 15pt">Open de agenda</span></a>' +
+            '<span class="badge badge-default badge-pill">'+amountOfEventsInAgenda+'</span>' +
+            '</li>' +
+        '</ul>').hide();
+
+    $('.jumbotron').append(homeList);
     setWelcomeText(userData.username);
-    new_item.show('normal');
+    homeList.show('normal');
     $('#loader').hide();
 }
 
-function setWelcomeText(data)
-{
+function setWelcomeText(data){
     $('#welcomeText').text("Welkom " + data);
 }
-
-function animateNav(id)
-{
-    $('#nav'+id).animate({height:'85px'},150, 'linear');
-    $('#nav'+id).attr('style', 'background-color:#222;');
-}
-
-function deanimateNav(id)
-{
-    $('#nav'+id).animate({height:'55px'});
-}
-
 
 
 

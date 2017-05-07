@@ -3,15 +3,14 @@
  */
 
 var userData;
+var userEvents;
 
-loadSessionData(function(data)
-{
+loadSessionData(function(data){
     userData = data;
     openEventWindow()
-});
+})
 
-function openEventWindow()
-{
+function openEventWindow(){
     $('#loader').show();
     $.ajax({
         type:'GET',
@@ -25,76 +24,72 @@ function openEventWindow()
     });
 }
 
-function setAmountEventText(data)
-{
-    $('#numberOfEvents').text("U heeft in totaal " + data.length + " evenementen in uw planning");
-}
+function generateEventView(){
+    var eventTable =
+        $('<h2 id="numberOfEvents"></h2><br><br>' +
+        '<table id="eventsTable" class="table table-hover">' +
+            '<thead><tr><th>Organiser</th><th>Title</th><th>Description</th><th>Start date</th><th>End date</th><th>Locations</th><th>Coworkers</th></tr></thead>' +
+            '<tbody id="tableBody"></tbody>' +
+        '</table>').hide();
 
-function generateEventView()
-{
-        var eventTable = $("<h1 id='numberOfEvents'></h1> <div class='subContainer'><div class='wrapper'> <div class='table'> <div class='row header blue'> <div class='cell'>Organiser</div><div class='cell'>Title</div> <div class='cell'>Description</div><div class='cell'>Start date</div> <div class='cell'>End date</div><div class='cell'>Location</div> <div class='cell'>Assigned coworkers</div></div></div></div>").hide();
-        var eventHeader1 = $("<h1 id='addEventLabel'>Voeg een event toe</h1> <div id='subContainer' class='subContainer'><div class='wrapper'> <div id='form1' class='table'> <div class='row header blue'> <div class='cell'>Organiser</div><div class='cell'>Title</div><div class='cell'>Start date</div> <div class='cell'>End date</div></div></div></div>").hide();
-        var eventHeader2 = $("<div id='subContainer2'><div class='wrapper'> <div id='form2' class='table'><div class='row header blue'><div class='cell'>Location</div> <div class='cell'>Coworkers</div></div></div></div></div>").hide();
-        var eventHeader3 = $("<div id='subContainer3'><div class='wrapper'> <div id='form3' class='table'><div class='row header blue'> <div class='cell'>Coworkers selected for the event</div></div></div></div></div>").hide();
-        var eventHeader4 = $("<div id='subContainer4'><div class='wrapper'> <div id='form4' class='table'><div class='row header blue'> <div class='cell'>Description</div></div></div></div></div>").hide();
-        var eventHeader5 = $("<div class='wrapper'> <div id='form5' class='table'><div class='cell'><input onclick='postEvent()' value='Voeg event toe' type='button'></div></div></div>");
+    $('.jumbotron').append(eventTable);
 
-        $('.content .container').append(eventTable);
-        for(var i = 0; i < userEvents.length; i++)
+    for(var i = 0; i < userEvents.length; i++)
+    {
+        var select = $('<select></select>');
+        var listOfWorkers = userEvents[i].invited.split('$');
+        for(var j = 0; j < listOfWorkers.length-1; j++)
         {
-            var select = $('<select></select>');
-            var listOfWorkers = userEvents[i].invited.split('$');
-            for(var j = 0; j < listOfWorkers.length-1; j++)
-            {
-                select.append('<option>'+listOfWorkers[j]+'</option>')
-            }
-            $(".table").append($("<div class='row'> <div class='cell'>"+userEvents[i].organiser+"</div><div class='cell'>"+userEvents[i].title+"</div><div class='cell'>"+userEvents[i].description+"</div><div class='cell'>"+userEvents[i].start_date+"</div><div class='cell'>"+userEvents[i].end_date+"</div><div class='cell'>"+userEvents[i].location+"</div><div id=row"+i+" class='cell'></div><div class='cell'><img id="+userEvents[i].id+"+ onclick='deleteEvent(this.id)' class='deleteButton' src='../../images/trash.png'></div></div>"));
-            $("#row"+i).append(select);
+           select.append('<option>'+listOfWorkers[j]+'</option>')
         }
+        $(".table").append($("<tr><td>"+userEvents[i].organiser+"</td><td>"+userEvents[i].title+"</td><td>"+userEvents[i].description+"</td><td>"+userEvents[i].start_date+"</td><td>"+userEvents[i].end_date+"</td><td>"+userEvents[i].location+"</td><td><div id=row"+i+" class='cell'></div></td> <td><a href='javascript:void()'><img onclick='deleteEvent(this.id)' id="+userEvents[i].id+"+ class='deleteButton' style='height: 25px; width:25px;' src='../../images/trash.png'></a></td>"));
+        $("#row"+i).append(select);
+    }
+    setAmountEventText(userEvents);
 
-        $('.content .container').append(eventHeader1);
-        $('#subContainer').append(eventHeader2);
-        $('#subContainer2').append(eventHeader3);
-        $('#subContainer3').append(eventHeader4);
-        $('#subContainer4').append(eventHeader5);
-        $("#form1").append($("<div class='row'><div class='cell'><input id='organiserInput' placeholder='In geval van meeting vul eigen naam' type='text'></div><div class='cell'><input id='titleInput' type='text'></div><div class='cell'><input id='startDateInput' type='datetime-local'></div><div class='cell'><input id='endDateInput' type='datetime-local'></div></div>"));
-        $("#form2").append($("<div class='row'><div class='cell'><input id='locationInput' type='text'></div><div class='cell'><div><input placeholder='Search and select coworkers' id='coWorkersInput' onkeyup='findReference(this.value)' type='search'></div><div id='resultBoxQuery'></div></div></div>"));
-        $("#form3").append($("<div class='row'><div class='cell'><ul style='display:inline-block' id='listInvited'></ul></div></div>"));
-        $("#form4").append($("<div class='row'><div class='cell'><textarea rows='10' id='descriptionInput'></textarea></div></div>"));
-        setAmountEventText(userEvents);
-        eventTable.show('normal');
-        eventHeader1.show('normal');
-        eventHeader2.show('normal');
-        eventHeader3.show('normal');
-        eventHeader4.show('normal');
-        eventHeader5.show('normal');
+    var form = $("<br><br><br><br><h2>Voeg een event toe</h2><br><br><form><div class='form-group'><label>Organiser</label><input class='form-control' id='organiserInput' placeholder='In geval van meeting vul eigen naam' type='text'></div>" +
+        "<div class='form-group'><label>Title</label><input class='form-control' id='titleInput' type='text'></div>" +
+        "<div class='form-group'><label>Start date</label><input class='form-control' id='startDateInput' type='datetime-local'></div>" +
+        "<div class='form-group'><label>End date</label><input class='form-control' id='endDateInput' type='datetime-local'></div>" +
+        "<div class='form-group'><label>Location</label><input class='form-control' id='locationInput' type='text'></div>" +
+        "<div class='form-group'><label>Coworkers</label><input class='form-control' placeholder='Search and select coworkers' id='coWorkersInput' onkeyup='findReference(this.value)' type='search'></div><div id='resultBoxQuery'></div><br><br><br>" +
+        "<div class='form-group'><label>Added coworkers</label><br><ul class='list-group' style='display:inline-block' id='listInvited'></ul></div>"+
+        "<div class='form-group'><label>Description</label><textarea class='form-control' rows='10' id='descriptionInput'></textarea></div>" +
+        "<div class='form-group'><input type='button' class='btn btn-secondary' value='Voeg toe' onclick='postEvent()'></div></form></form>").hide();
+    $('.jumbotron').append(form);
+
+    eventTable.show('normal');
+    form.show('normal');
 }
 
-function findReference(searchkey)
-{
+function setAmountEventText(data){
+    $('#numberOfEvents').text("U heeft in totaal " + data.length + " evenement(en) in uw planning");
+}
+
+function findReference(searchkey){
     $.ajax({
        type:'GET',
         url:'api/users/query/'+searchkey,
         success: function(data)
         {
-            if (data!=null && data!=[])
+            var resultBox = $('#resultBoxQuery');
+            if (data==""){
+                resultBox.empty();
+                var resultBar = $('<select></select>');
+                resultBar.append($('<option onclick="">' + 'No results found' +'</option>'));
+                resultBox.append(resultBar);
+            }
+            else
             {
-                $('#resultBoxQuery').show();
-                $('#resultBoxQuery').empty();
-                var resultBar = $('<select id="coWorkersList" onclick="changeList()" style="display:inline-block; vertical-align:top; overflow:hidden; border:solid grey 1px; " size=' +data.length+'></select>');
+                resultBox.show();
+                resultBox.empty();
+                var resultBar = $('<select class="custom-select" id="coWorkersList" onclick="changeList()"></select>');
 
                 for(var i =0; i< data.length; i++)
                 {
                     resultBar.append($("<option id=" + data[i].username+ ">" + data[i].first_name + ' ' + data[i].last_name + '</option>'));
                 }
-                $('#resultBoxQuery').append(resultBar);
-            }
-            else if(data=="")
-            {
-                $('#resultBoxQuery').empty();
-                var resultBar = $('<select style="display:inline-block; vertical-align:top; overflow:hidden; border:solid grey 1px; " size="1"></select>');
-                resultBar.append($('<option onclick="">' + 'No results found' +'</option>'));
-                $('#resultBoxQuery').append(resultBar);
+                resultBox.append(resultBar);
             }
         }
     });
@@ -103,16 +98,14 @@ function findReference(searchkey)
 function changeList() {
     var username = $("#coWorkersList").find('option:selected').attr('id');
     $('#resultBoxQuery').hide();
-    $('#listInvited').append('<li>'+username+'\n'+'</li>');
-};
-
-function emptyView()
-{
-    $('.content .container').empty();
+    $('#listInvited').append('<li class="list-group-item list-group-item-success">'+username+'\n'+'</li>');
 }
 
-function deleteEvent(id)
-{
+function emptyView(){
+    $('.jumbotron').empty();
+}
+
+function deleteEvent(id){
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -136,9 +129,7 @@ function deleteEvent(id)
     });
 }
 
-
-function postEvent()
-{
+function postEvent(){
     var listOfPeople = $('#listInvited').text().replace(/\n/g, "$");
 
     var event = {

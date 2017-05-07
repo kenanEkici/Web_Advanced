@@ -24,7 +24,7 @@ class RoleMiddleware
         else
         {
             $urlToAccess = $request->url();
-            return Redirect::to('/login')->with('errorAuthorisation', $urlToAccess);
+            return Redirect::to('/')->with('errorAuthorisation', $urlToAccess);
         }
     }
 }

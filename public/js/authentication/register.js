@@ -19,13 +19,16 @@ function openRegister()
         opened=true;
         $('html, body').animate({ scrollTop: 500});
         $('#register').val("Close register");
-        copyForm = $('#container').clone();
-        $('#container').append("<form  class='inlogform'>  <p hidden id='url'> </p> <p id='message'><?php echo $message; ?></p> <h1 id='headline'>Register</h1>" +
-            "<span>Username</span> <input id='usernameFrm' type='text'>  <br>  <span>Password</span> <input id='passwordFrm' type='password'><br>"
-            + " <span>First name</span> <input id='firstNameInput' type='text'><br><span>Last name</span> <input id='lastNameInput' type='text'><br> <span>Department</span> <select id='optionFrm'><option>CEO</option><option>Administration</option><option>Accounting</option><option>Entertainment</option><option>Recreation</option><option>Admin</option></select><br>"
-            +"<br>  <span>Address</span> <input type='text' id='address'>  <br><input onclick='registerUser()' type='button' value='Register'> </form>")
 
-
+        copyForm = $('.container').clone();
+        $('.container').append("<form > <br><h2 id='headline'>Register</h2><br>" +
+            "<div class='form-group'><label>Username</label> <input class='form-control' id='usernameFrm' type='text'> </div>" +
+            "<div class='form-group'><label>Password</label> <input class='form-control' id='passwordFrm' type='password'></div>"+
+            "<div class='form-group'><label>First name</label> <input class='form-control' id='firstNameInput' type='text'></div>" +
+            "<div class='form-group'><label>Last name</label> <input class='form-control' id='lastNameInput' type='text'></div>" +
+            "<div class='form-group'><label>Department</label> <select class='form-control' id='optionFrm'><option>CEO</option><option>Administration</option><option>Accounting</option><option>Entertainment</option><option>Recreation</option><option>Admin</option></select><br></div>"+
+            "<div class='form-group'><label>Address</label> <input class='form-control' type='text' id='address'></div>" +
+            "<div><input onclick='registerUser()' class='btn btn-secondary' type='button' value='Register'></div></form>")
     }
 }
 
@@ -69,7 +72,7 @@ function registerUser()
 
 function closeRegister()
 {
-    $('#container').replaceWith(copyForm);
+    $('.container').replaceWith(copyForm);
     opened=false;
 }
 

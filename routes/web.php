@@ -47,16 +47,12 @@ Route::group(['middleware' => 'session'], function () {
 //for guests
 
 
-Route::get('/login', function()
+Route::get('/', function()
 {
     return view('Login',['message'=>""]);
 });
 
 
-Route::get('/', function()
-{
-    return view('Index');
-});
 
 
 

@@ -23,7 +23,7 @@ class CheckSession
         else // if not then redirect to login page
         {
             $urlToAccess = $request->url();
-            return Redirect::to('/login')->with('errorNotLoggedIn', $urlToAccess);
+            return Redirect::to('/')->with('errorNotLoggedIn', $urlToAccess);
         }
     }
 }

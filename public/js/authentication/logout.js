@@ -17,7 +17,7 @@ function logout()
         url:'api/logout',
         success:function(data)
         {
-            window.location.href = "/login";
+            window.location.href = "/";
         }
     });
 };

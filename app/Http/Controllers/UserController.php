@@ -41,7 +41,7 @@ class UserController extends Controller
 
     public function logout(Request $request)
     {
-        return Redirect::to('/login')->withCookie(\Cookie::forget('sessionId'));
+        return Redirect::to('/')->withCookie(\Cookie::forget('sessionId'));
     }
 
     //server side validation

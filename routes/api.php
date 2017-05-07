@@ -42,6 +42,7 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('/sessionData', 'UserController@getDecryptedCookie');
 });
 
+//routes to authorize a guest
 Route::post('/register/user', 'UserController@store');
 Route::post('/login', 'UserController@login');
 Route::post('/logout', 'UserController@logout');
