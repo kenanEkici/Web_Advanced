@@ -8,7 +8,7 @@ var userEvents;
 loadSessionData(function(data){
     userData = data;
     openEventWindow()
-})
+});
 
 function openEventWindow(){
     $('#loader').show();
@@ -134,6 +134,7 @@ function postEvent(){
 
     var event = {
         organiser: $("#organiserInput").val(),
+        event_ownerId: userData.id,
         title: $("#titleInput").val(),
         description: $("#descriptionInput").val(),
         start_date: $("#startDateInput").val(),

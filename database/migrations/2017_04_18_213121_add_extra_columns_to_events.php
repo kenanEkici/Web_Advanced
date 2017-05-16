@@ -16,6 +16,7 @@ class AddExtraColumnsToEvents extends Migration
         Schema::table('events', function (Blueprint $table) {
             //
             $table->string('organiser');
+            $table->integer('event_ownerId');
             $table->string('invited');
         });
     }

@@ -23,9 +23,9 @@ class EventRepository implements IRepository
         return Event::where('id', $id)->get();
     }
 
-    function getByName($title)
+    function getByName($name)
     {
-        return User::where('username',$title)->first()->events()->get();
+        return User::where('username',$name)->first()->events()->get();
     }
 
     //  create new event   <--- event (has an array of users)
@@ -39,6 +39,7 @@ class EventRepository implements IRepository
             $user = User::where('username', $userAr[$i])->first();
             $event->users()->attach($user);
         }
+
         return $event;
     }
 
