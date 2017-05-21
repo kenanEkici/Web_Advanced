@@ -14,11 +14,14 @@
     <script
             src="{!! asset('js/authentication/register.js') !!}">
     </script>
+    <script
+            src="{!! asset('js/authentication/registerValidation.js') !!}">
+    </script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body style="background-image: url({{ URL::asset('images/login.jpeg') }})">
-{{ HTML::style('css/responsiveLogin.css') }}
+{{ HTML::style('css/loginSheet.css') }}
     <div >
         <div class="container">
                 <form  class="inlogform">

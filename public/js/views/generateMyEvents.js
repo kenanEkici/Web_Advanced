@@ -10,6 +10,7 @@ loadSessionData(function(data){
     openEventWindow()
 });
 
+
 function openEventWindow(){
     $('#loader').show();
     $.ajax({
@@ -36,30 +37,35 @@ function generateEventView(){
 
     for(var i = 0; i < userEvents.length; i++)
     {
+        sessionStorage.setItem("location"+i, userEvents[i].location);
+
         var select = $('<select></select>');
         var listOfWorkers = userEvents[i].invited.split('$');
         for(var j = 0; j < listOfWorkers.length-1; j++)
         {
            select.append('<option>'+listOfWorkers[j]+'</option>')
         }
-        $(".table").append($("<tr><td>"+userEvents[i].organiser+"</td><td>"+userEvents[i].title+"</td><td>"+userEvents[i].description+"</td><td>"+userEvents[i].start_date+"</td><td>"+userEvents[i].end_date+"</td><td>"+userEvents[i].location+"</td><td><div id=row"+i+" class='cell'></div></td> <td><a href='javascript:void()'><img onclick='deleteEvent(this.id)' id="+userEvents[i].id+"+ class='deleteButton' style='height: 25px; width:25px;' src='../../images/trash.png'></a></td>"));
+        $(".table").append($("<tr><td>"+userEvents[i].organiser+"</td><td>"+userEvents[i].title+"</td><td>"+userEvents[i].description+"</td><td>"+userEvents[i].start_date+"</td><td>"+userEvents[i].end_date+"</td><td><input class='btn btn-primary btn-sm' data-toggle='modal' data-target='#googleMapsModal' type='button' id=location"+i+" onclick='showMapsWindow(this.id)' value='Bekijk locatie'></td><td><div id=row"+i+" class='cell'></div></td> <td><a href='javascript:void()'><img onclick='deleteEvent(this.id)' id="+userEvents[i].id+"+ class='deleteButton' style='height: 25px; width:25px;' src='../../images/trash.png'></a></td>"));
         $("#row"+i).append(select);
     }
     setAmountEventText(userEvents);
 
-    var form = $("<br><br><br><br><h2>Voeg een event toe</h2><br><br><form><div class='form-group'><label>Organiser</label><input class='form-control' id='organiserInput' placeholder='In geval van meeting vul eigen naam' type='text'></div>" +
-        "<div class='form-group'><label>Title</label><input class='form-control' id='titleInput' type='text'></div>" +
-        "<div class='form-group'><label>Start date</label><input class='form-control' id='startDateInput' type='datetime-local'></div>" +
-        "<div class='form-group'><label>End date</label><input class='form-control' id='endDateInput' type='datetime-local'></div>" +
-        "<div class='form-group'><label>Location</label><input class='form-control' id='locationInput' type='text'></div>" +
+    var form = $("<br><br><br><br><h2>Voeg een event toe</h2><br><h5 id='errorEvent'></h5><br><form>" +
+        "<div class='form-group'><label>Organiser</label><input onblur='validateOrganiser()' class='form-control' id='organiserInput' placeholder='In geval van meeting vul eigen naam' type='text'></div>" +
+        "<div class='form-group'><label>Title</label><input class='form-control' onblur='validateTitle()' id='titleInput' type='text'></div>" +
+        "<div class='form-group'><label>Start date</label><input class='form-control' onblur='validateStartDate()'  id='startDateInput' type='datetime-local'></div>" +
+        "<div class='form-group'><label>End date</label><input class='form-control' onblur='validateEndDate()'  id='endDateInput' type='datetime-local'></div>" +
+        "<div class='form-group'><label>Location</label><br/><span id='mapsIndicatie'>Selecteer een locatie door op de google maps venster te klikken</span><div id='map'></div></div>" +
         "<div class='form-group'><label>Coworkers</label><input class='form-control' placeholder='Search and select coworkers' id='coWorkersInput' onkeyup='findReference(this.value)' type='search'></div><div id='resultBoxQuery'></div><br><br><br>" +
         "<div class='form-group'><label>Added coworkers</label><br><ul class='list-group' style='display:inline-block' id='listInvited'></ul></div>"+
-        "<div class='form-group'><label>Description</label><textarea class='form-control' rows='10' id='descriptionInput'></textarea></div>" +
+        "<div class='form-group'><label>Description</label><textarea class='form-control' onblur='validateDescription()'  rows='10' id='descriptionInput'></textarea></div>" +
         "<div class='form-group'><input type='button' class='btn btn-secondary' value='Voeg toe' onclick='postEvent()'></div></form></form>").hide();
     $('.jumbotron').append(form);
 
     eventTable.show('normal');
     form.show('normal');
+
+    $("#errorEvent").css("color", "#DD2C00");
 }
 
 function setAmountEventText(data){
@@ -105,63 +111,8 @@ function emptyView(){
     $('.jumbotron').empty();
 }
 
-function deleteEvent(id){
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    var obj = {id :id}
-    $.ajax({
-        type: 'DELETE',
-        url: "api/events",
-        data: obj,
-        beforeSend: function() {
 
-        },
-        success: function(data) {
-            emptyView();
-            openEventWindow();
-        },
-        error: function(xhr, textStatus, thrownError) {
-            alert('Fout bij het verwijderen van event');
-        }
-    });
-}
 
-function postEvent(){
-    var listOfPeople = $('#listInvited').text().replace(/\n/g, "$");
 
-    var event = {
-        organiser: $("#organiserInput").val(),
-        event_ownerId: userData.id,
-        title: $("#titleInput").val(),
-        description: $("#descriptionInput").val(),
-        start_date: $("#startDateInput").val(),
-        end_date: $("#endDateInput").val(),
-        location: $("#locationInput").val(),
-        invited: listOfPeople
-    };
 
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
 
-    $.ajax({
-        type: 'POST',
-        url: "api/events",
-        data: event,
-        beforeSend: function() {
-
-        },
-        success: function(data) {
-            emptyView();
-            openEventWindow();
-        },
-        error: function(xhr, textStatus, thrownError) {
-            alert("Voer alle velden correct in!")
-        }
-    });
-}

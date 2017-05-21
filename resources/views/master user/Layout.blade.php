@@ -28,6 +28,9 @@
     <script
             src="{!! asset('js/authentication/logout.js') !!}">
     </script>
+    <script
+            src="{!! asset('js/views/ajaxCrudEvents.js') !!}">
+    </script>
     @yield('generateScript')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -48,7 +51,6 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a id="nav1" href="/home">Home</a></li>
                 <li><a id="nav2" href="/events">Mijn events</a></li>
-                <li><a id="nav3" href="/profile">Mijn profiel</a></li>
                 <li><a id="nav4" href="/agenda">Agenda</a></li>
                 <li><a id="nav4" href="javascript:void(0)" onclick="logout()">Log uit</a></li>
             </ul>
@@ -59,5 +61,6 @@
 <div class="jumbotron">
 </div>
 </div>
+@yield('googleMaps')
 </body>
 </html>

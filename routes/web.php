@@ -42,11 +42,8 @@ Route::group(['middleware' => 'session'], function () {
     });
 });
 
-
 //no sessions or credentials needed
 //for guests
-
-
 Route::get('/', function()
 {
     return view('Login',['message'=>""]);

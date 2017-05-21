@@ -17,12 +17,11 @@ use Illuminate\Http\Request;
 //only specific roles can access specific api controllers
 
 */
-Route::group(['middleware' => 'role'], function () {
+Route::group(['middleware' => 'session'], function () {
 
     //GET routes --> controllers for JSON user output
     Route::get('/users', 'UserController@showAll');
     Route::get('/users/{id}', 'UserController@showById')->where('id', '[0-9]+');
-    Route::get('/users/{name}', 'UserController@showByUsername')->where('name', '[A-Za-z]\w+');
     Route::get('/users/query/{query}', 'UserController@searchByIndex');
     //POST/UPDATE/DELETE routes --> controllers for JSON user controls
     Route::put('/users', 'UserController@update');
@@ -39,10 +38,12 @@ Route::group(['middleware' => 'role'], function () {
     Route::post('/events', 'EventController@store');
     Route::delete('/events', 'EventController@destroy');
 
+    //Get the decrypted cookie output to identify which user is using the session
     Route::get('/sessionData', 'UserController@getDecryptedCookie');
 });
 
-//routes to authorize a guest
+//Routes for authorizing guests
 Route::post('/register/user', 'UserController@store');
 Route::post('/login', 'UserController@login');
 Route::post('/logout', 'UserController@logout');
+Route::get('/users/{name}', 'UserController@showByUsername')->where('name', '[A-Za-z]\w+');

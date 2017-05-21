@@ -17,7 +17,42 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        return $this->events->store($request->all(), $request->input('invited'));
+        $validation = false;
+        $title = $request->input('title');
+        $organiser = $request->input('organiser');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $location = $request->input('location');
+        $description = $request->input('description');
+
+        if (strlen($title) >= 6 && strlen($title) <= 20) // min 4kar max 15
+        {
+            if (strlen($organiser) >= 4 && strlen($organiser) <= 15 ) // min 6kar max 20
+            {
+                if (strlen($startDate) > 0) // chosen
+                {
+                    if (strlen($endDate) > 0) // chosen
+                    {
+                        if (strlen($location) >= 4 ) // min 4kar
+                        {
+                            if (strlen($description) >= 4  && strlen($description) <= 600 ) // min 4kar max 600
+                            {
+                                $validation = true;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+        if ($validation)
+        {
+            return $this->events->store($request->all(), $request->input('invited'));
+        }
+        else
+        {
+            var_dump("invalid validation");
+        }
     }
 
     public function showById($id)

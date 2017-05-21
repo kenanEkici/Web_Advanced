@@ -4,7 +4,7 @@
 
 var userEvents;
 
-openAgendaWindow()
+openAgendaWindow();
 
 function openAgendaWindow(){
     $('#loader').show();
@@ -17,32 +17,6 @@ function openAgendaWindow(){
             generateAgendaView();
             $('#loader').hide();
             setAmountEventText(data);
-        }
-    });
-}
-
-function deleteEvent(id){
-    $('#loader').show();
-
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    var obj = {id :id}
-    $.ajax({
-        type: 'DELETE',
-        url: "api/events",
-        data: obj,
-        beforeSend: function() {
-
-        },
-        success: function(data) {
-            emptyView();
-            openAgendaWindow();
-        },
-        error: function(xhr, textStatus, thrownError) {
-            alert('Fout bij het verwijderen van event');
         }
     });
 }
@@ -63,13 +37,15 @@ function generateAgendaView(){
 
     for(var i = 0; i < userEvents.length; i++)
     {
+        sessionStorage.setItem("location"+i, userEvents[i].location);
+
         var select = $('<select></select>');
         var listOfWorkers = userEvents[i].invited.split('$');
         for(var j = 0; j < listOfWorkers.length-1; j++)
         {
             select.append('<option>'+listOfWorkers[j]+'</option>')
         }
-        $(".table").append($("<tr><td>"+userEvents[i].organiser+"</td><td>"+userEvents[i].title+"</td><td>"+userEvents[i].description+"</td><td>"+userEvents[i].start_date+"</td><td>"+userEvents[i].end_date+"</td><td>"+userEvents[i].location+"</td><td><div id=row"+i+" class='cell'></div></td>"));
+        $(".table").append($("<tr><td>"+userEvents[i].organiser+"</td><td>"+userEvents[i].title+"</td><td>"+userEvents[i].description+"</td><td>"+userEvents[i].start_date+"</td><td>"+userEvents[i].end_date+"</td><td><input class='btn btn-primary btn-sm' data-toggle='modal' data-target='#googleMapsModal' type='button' id=location"+i+" onclick='showMapsWindow(this.id)' value='Bekijk locatie'></td><td><div id=row"+i+" class='cell'></div></td>"));
         $("#row"+i).append(select);
     }
 

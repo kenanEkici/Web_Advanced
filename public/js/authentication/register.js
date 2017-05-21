@@ -21,53 +21,56 @@ function openRegister()
         $('#register').val("Close register");
 
         copyForm = $('.container').clone();
-        $('.container').append("<form > <br><h2 id='headline'>Register</h2><br>" +
-            "<div class='form-group'><label>Username</label> <input class='form-control' id='usernameFrm' type='text'> </div>" +
-            "<div class='form-group'><label>Password</label> <input class='form-control' id='passwordFrm' type='password'></div>"+
-            "<div class='form-group'><label>First name</label> <input class='form-control' id='firstNameInput' type='text'></div>" +
-            "<div class='form-group'><label>Last name</label> <input class='form-control' id='lastNameInput' type='text'></div>" +
+        $('.container').append("<form > <br><h2 id='headline'>Register</h2><br> <h5 id='errorRegistration'></h5><br>" +
+            "<div class='form-group'><label>Username</label> <input class='form-control' onblur='validateUserName()' id='usernameFrm' type='text'> </div>" +
+            "<div class='form-group'><label>Password</label> <input class='form-control' onblur='validatePassword()' id='passwordFrm' type='password'></div>"+
+            "<div class='form-group'><label>First name</label> <input class='form-control' onblur='validateFirstName()' id='firstNameInput' type='text'></div>" +
+            "<div class='form-group'><label>Last name</label> <input class='form-control' onblur='validateLastName()' id='lastNameInput' type='text'></div>" +
             "<div class='form-group'><label>Department</label> <select class='form-control' id='optionFrm'><option>CEO</option><option>Administration</option><option>Accounting</option><option>Entertainment</option><option>Recreation</option><option>Admin</option></select><br></div>"+
-            "<div class='form-group'><label>Address</label> <input class='form-control' type='text' id='address'></div>" +
+            "<div class='form-group'><label>Address</label> <input class='form-control'  onblur='validateAddress()' type='text' id='address'></div>" +
             "<div><input onclick='registerUser()' class='btn btn-secondary' type='button' value='Register'></div></form>")
     }
 }
 
 function registerUser()
 {
-    var user = {
-        username: $("#usernameFrm").val(),
-        first_name: $("#firstNameInput").val(),
-        last_name: $("#lastNameInput").val(),
-        hash: $("#passwordFrm").val(),
-        role: $("#optionFrm").val(),
-        address: $("#address").val()
-    };
+    if (validateEverything())
+    {
+        var user = {
+            username: $("#usernameFrm").val(),
+            first_name: $("#firstNameInput").val(),
+            last_name: $("#lastNameInput").val(),
+            hash: $("#passwordFrm").val(),
+            role: $("#optionFrm").val(),
+            address: $("#address").val()
+        };
 
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-    $.ajax({
-        type: 'POST',
-        url: "api/register/user",
-        data: user,
-        success: function(data) {
-            alert("gebruiker toegevoegd!")
-            username = $("#usernameFrm").val();
-            password = $("#passwordFrm").val();
+        $.ajax({
+            type: 'POST',
+            url: "api/register/user",
+            data: user,
+            success: function(data) {
+                alert("gebruiker toegevoegd!")
+                username = $("#usernameFrm").val();
+                password = $("#passwordFrm").val();
 
-            closeRegister();
+                closeRegister();
 
-            $('#usernameInput').val(username);
-            $('#passwordInput').val(password);
-            $('#register').val("Register");
-        },
-        error: function(xhr, textStatus, thrownError) {
-            alert('fout met het posten naar api/register/user');
-        }
-    });
+                $('#usernameInput').val(username);
+                $('#passwordInput').val(password);
+                $('#register').val("Register");
+            },
+            error: function(xhr, textStatus, thrownError) {
+                alert('fout met het posten naar api/register/user');
+            }
+        });
+    }
 }
 
 function closeRegister()
