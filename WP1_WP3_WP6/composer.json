@@ -1,0 +1,15 @@
+{
+    "require": {
+        "altorouter/altorouter": "^1.2"
+    },
+    "autoload": {
+        "psr-4":{
+            "controller\\" : "src\\api\\controller\\" ,
+            "model\\" : "src\\api\\model\\",
+            "view\\" : "src\\api\\view\\",
+            "api\\" : "src\\api\\",
+            "vendor\\" : "vendor\\",
+            "public\\" : "src\\public"
+        }
+    }
+}
