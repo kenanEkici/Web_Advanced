@@ -32,8 +32,6 @@ echo
 <input id='location' type='text'><br>
 <label>Invited Coworkers</label>
 <input id='invited' type='text'><br>
-<label>Event Owner Id</label>
-<input id='event_ownerId' type='text'>
 <input type='button' onclick='postData()' value='Voeg toe'>
 </form>
 </div>
@@ -49,7 +47,6 @@ echo
             <th>End date</th>
             <th>Location</th>
             <th>Invited coworkers</th>
-            <th>Event Owner Id</th>
          </tr></thead>
          <tbody id='contentBody'>            
          </tbody>        
