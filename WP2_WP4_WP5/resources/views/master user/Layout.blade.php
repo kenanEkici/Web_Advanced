@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Welcome</title>
     <style>
+        {{--loader knop--}}
         #loader {
             border: 6px solid #f3f3f3; /* Light grey */
             border-top: 6px solid black; /* Blue */
@@ -28,9 +29,7 @@
     <script
             src="{!! asset('js/authentication/logout.js') !!}">
     </script>
-    <script
-            src="{!! asset('js/views/ajaxCrudEvents.js') !!}">
-    </script>
+    {{--Hier komen pagina specifieke scripts--}}
     @yield('generateScript')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -61,6 +60,7 @@
 <div class="jumbotron">
 </div>
 </div>
+{{--Hier komt de google maps api call--}}
 @yield('googleMaps')
 </body>
 </html>

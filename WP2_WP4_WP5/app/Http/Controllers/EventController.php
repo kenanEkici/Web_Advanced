@@ -8,15 +8,18 @@ use App\Http\Repositories\EventRepository;
 
 class EventController extends Controller
 {
-    protected $events;
 
-    public function __construct(EventRepository $events)
+    protected $eventRepo;
+
+    public function __construct(EventRepository $eventRepo)
     {
-        $this->events = $events;
+        $this->eventRepo = $eventRepo;
     }
 
+    //POST
     public function store(Request $request)
     {
+        //server-side validatie van een event
         $validation = false;
         $title = $request->input('title');
         $organiser = $request->input('organiser');
@@ -45,38 +48,45 @@ class EventController extends Controller
                 }
             }
         }
+        //als validation lukt, maak een nieuwe event aan
         if ($validation)
         {
-            return $this->events->store($request->all(), $request->input('invited'));
+            return $this->eventRepo->store($request->all(), $request->input('invited'));
         }
         else
         {
             var_dump("invalid validation");
+            return null;
         }
     }
 
+    //GET BY ID
     public function showById($id)
     {
-        return $this->events->getById($id);
+        return $this->eventRepo->getById($id);
     }
 
+    //GET ALL
     public function showAll()
     {
-        return $this->events->getAll();
+        return $this->eventRepo->getAll();
     }
 
+    //GET BY USERNAME
     public function showByUser($username)
     {
-        return $this->events->getByName($username);
+        return $this->eventRepo->getByName($username);
     }
 
+    //PUT
     public function update(Request $request)
     {
-        $this->events->edit($request->input('id'),$request->all());
+        $this->eventRepo->edit($request->input('id'),$request->all());
     }
 
+    //DELETE
     public function destroy(Request $request)
     {
-        $this->events->delete($request->input('id'));
+        $this->eventRepo->delete($request->input('id'));
     }
 }

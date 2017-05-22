@@ -14,13 +14,15 @@ class CheckSession
      * @param  \Closure  $next
      * @return mixed
      */
+
+    //middleware om binnenkomende requests te checken of dat ze een sessie hebben
     public function handle($request, Closure $next)
     {
         if($request->cookies->has('sessionId')) //check if user has a session_id
         {
             return $next($request);
         }
-        else // if not then redirect to login page
+        else //als ze geen sessiecookie hebben worden ze geredirect naar index
         {
             $urlToAccess = $request->url();
             return Redirect::to('/')->with('errorNotLoggedIn', $urlToAccess);

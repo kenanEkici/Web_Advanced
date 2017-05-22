@@ -15,11 +15,13 @@
         width:100%;
     }
 </style>
+{{----}}
 @extends('master user.Layout')
 @section('generateScript')
     <script  src="{!! asset('js/views/loadSession.js') !!}"></script>
     <script  src="{!! asset('js/views/generateMyEvents.js') !!}"></script>
     <script  src="{!! asset('js/views/eventValidation.js') !!}"></script>
+    <script  src="{!! asset('js/views/ajaxCrudEvents.js') !!}"></script>
 @stop
 @section('googleMaps')
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFMCLyivsWTU1Iv4iToM9fOdEWJLHfQOQ&callback=initGoogleMaps"

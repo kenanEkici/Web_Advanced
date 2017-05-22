@@ -32,6 +32,7 @@ class appSeeder extends Seeder
     //php artisan migrate
     //php artisan db:seed
 
+    //seeden van database
     public function run()
     {
         DB::table('users')->delete();
