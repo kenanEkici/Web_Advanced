@@ -6,11 +6,26 @@ use model\Event;
 
 $router = new AltoRouter();
 
-$user = "web07_db";
+
+//WERKPAKKET 6 database configs
+
+//getting database configs from json file
+$getJsonData = file_get_contents("src/api/database/database_configs.json");
+
+//decode the data we get from json
+$decodedJsonData = json_decode($getJsonData,true);
+$user = $decodedJsonData['database'][0]['user'];
+$password = $decodedJsonData['database'][0]['password'];
+$database = $decodedJsonData['database'][0]['database_name'];
+$hostname = $decodedJsonData['database'][0]['hostname'];
+
+
+// WERKPAKKET 1 database configs
+/*$user = "web07_db";
 $password = "web07";
 $database = "web07_db";
 $hostname = "213.136.26.180";
-$pdo = null;
+$pdo = null;*/
 
 
 $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);

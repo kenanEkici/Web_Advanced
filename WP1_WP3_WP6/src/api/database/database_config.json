@@ -1,0 +1,10 @@
+{
+  "database": [
+    {
+      "user": "web07_db",
+      "password": "web07",
+      "database_name": "web07_db",
+      "hostname": "213.136.26.180"
+    }
+  ]
+}
