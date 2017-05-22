@@ -1,6 +1,10 @@
 /**
  * Created by Kenan on 21/04/2017.
  */
+
+//login by sending credentials to server
+//server response creates the right session cookie
+//and allows us access to the system.
 function login(){
     var username = $('#usernameInput').val();
 
@@ -25,6 +29,7 @@ function login(){
     }
 }
 
+//function for handling return URL's if there's any
 function handleURL(url){
     if (!$.trim(url.html()))
     {

@@ -106,6 +106,8 @@ function emptyErrMess()
     $("#errorRegistration").text("");
 }
 
+//functie om requests te sturen om te checken of een bepaalde username
+//al genomen is of niet
 function checkUsernameExisting(val)
 {
     var username = $("#usernameFrm").val();

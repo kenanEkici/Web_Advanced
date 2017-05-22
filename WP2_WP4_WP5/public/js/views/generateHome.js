@@ -5,9 +5,12 @@
 //---------------------------SESSION VARIABLES
 
 var userData;
+
+//meldingen
 var amountOfPersonalEvents;
 var amountOfEventsInAgenda;
 
+//laad sessiedata eerst, en genereer home view daarna
 loadSessionData(function(data){
     userData = data;
     $.ajax({
@@ -21,7 +24,6 @@ loadSessionData(function(data){
                 url:'api/events',
                 success:function(allEvents)
                 {
-
                     amountOfEventsInAgenda = allEvents.length;
                     generateHomeView();
                     $('#loader').hide();
@@ -29,8 +31,9 @@ loadSessionData(function(data){
             });
         }
     });
-})
+});
 
+//actual generating of view with data in it
 function generateHomeView(){
    var homeList = $('<h2 id="welcomeText"></h2><br>' +
             '<ul class="list-group">' +

@@ -11,15 +11,9 @@
 |
 */
 
-//php artisan serve --port=80
-// to run
 
 //only for users that have a session_id thus are logged in
 Route::group(['middleware' => 'session'], function () {
-
-    //wrap another middleware group to return master user page
-    //the javascript returned with the specific master user page will
-    //determine which data the user will retrieve
 
     Route::get('/home', function()
     {

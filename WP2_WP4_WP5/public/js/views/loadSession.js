@@ -2,8 +2,10 @@
  * Created by Kenan on 4/05/2017.
  */
 
+//array voor de google maps markers
 var markers = [];
 
+//laad sessie data functie die een callback van data teruggeeft
 function loadSessionData(callback)
 {
     $.ajax({
@@ -24,7 +26,7 @@ function loadSessionData(callback)
 
 //____________ INSPIRATIE UIT GOOGLE MAPS API DOCUMENTATION _______________
 
-//MAPS definieren in een div
+//MAPS definieren in een div met een timeout (na de api call)
 function initGoogleMaps()
 {
     setTimeout(function(){
@@ -69,11 +71,13 @@ function deleteMarkers() {
     markers = [];
 }
 
+//functie om marker locatie te krijgen en deze in de juiste formaat in de database te zetten
 function getMarkerLocation()
 {
     return markers[0].getPosition().lat() + "$" + markers[0].getPosition().lng();
 }
 
+//genereer google maps view een paar seconden later na het tonen van modal view (vanwege een bug)
 function showMapsWindow(id)
 {
     setTimeout(function(){

@@ -12,17 +12,19 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 
-//if you have a session, you have a role
 
-//only specific roles can access specific api controllers
 
 */
+//Grouping certain routes in a middleware so that only users with a session
+//can access these routes
+
 Route::group(['middleware' => 'session'], function () {
 
     //GET routes --> controllers for JSON user output
     Route::get('/users', 'UserController@showAll');
     Route::get('/users/{id}', 'UserController@showById')->where('id', '[0-9]+');
     Route::get('/users/query/{query}', 'UserController@searchByIndex');
+
     //POST/UPDATE/DELETE routes --> controllers for JSON user controls
     Route::put('/users', 'UserController@update');
     Route::delete('/users', 'UserController@destroy');
@@ -43,7 +45,11 @@ Route::group(['middleware' => 'session'], function () {
 });
 
 //Routes for authorizing guests
+//geen session voor nodig dus ook niet gegroepeerd in middleware
 Route::post('/register/user', 'UserController@store');
 Route::post('/login', 'UserController@login');
 Route::post('/logout', 'UserController@logout');
+
+//Route for checking is a certain username exists
+//Niet safe, zou anderser kunnen
 Route::get('/users/{name}', 'UserController@showByUsername')->where('name', '[A-Za-z]\w+');

@@ -4,8 +4,10 @@
 
 var userEvents;
 
+//when the script is loaded, run this function to generate the agenda window
 openAgendaWindow();
 
+//ajax call to get all existing events
 function openAgendaWindow(){
     $('#loader').show();
     $.ajax({
@@ -25,6 +27,7 @@ function emptyView(){
     $('.content .container').empty();
 }
 
+//generate actual view with the data in it
 function generateAgendaView(){
     var eventTable =
         $('<h2 id="numberOfEvents"></h2><br><br>' +

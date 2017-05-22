@@ -7,6 +7,7 @@ var password;
 var url;
 var opened = false;
 
+//open small register window
 function openRegister()
 {
     if (opened)
@@ -32,6 +33,7 @@ function openRegister()
     }
 }
 
+//actual function to post the user (validation first)
 function registerUser()
 {
     if (validateEverything())
@@ -73,6 +75,7 @@ function registerUser()
     }
 }
 
+//sluit register menu
 function closeRegister()
 {
     $('.container').replaceWith(copyForm);

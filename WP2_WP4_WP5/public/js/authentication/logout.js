@@ -1,9 +1,9 @@
 /**
  * Created by Kenan on 23/04/2017.
  */
-/**
- * Created by Kenan on 21/04/2017.
- */
+
+
+//function to delete session(cookie)
 function logout()
 {
     $.ajaxSetup({

@@ -1,9 +1,13 @@
 /**
  * Created by Kenan on 20/05/2017.
  */
+
+//ajax call om een event te posten (validation first)
 function postEvent(){
     if (validateEverything())
     {
+        //lijst gekozen door een gebruiken splitten dmv $
+        //zodat we deze in de backend ook kunnen splitsen
         var listOfPeople = $('#listInvited').text().replace(/\n/g, "$");
 
         var event = {
@@ -40,6 +44,7 @@ function postEvent(){
     }
 }
 
+//ajax call om een event te verwijderen adhv id
 function deleteEvent(id){
     $('#loader').show();
 
@@ -53,9 +58,6 @@ function deleteEvent(id){
         type: 'DELETE',
         url: "api/events",
         data: obj,
-        beforeSend: function() {
-
-        },
         success: function(data) {
             emptyView();
             openEventWindow();

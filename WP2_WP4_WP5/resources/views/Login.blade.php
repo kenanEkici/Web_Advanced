@@ -30,9 +30,6 @@
                         if(Session::has('errorNotLoggedIn')){
                             $message = "This page is only accessible by authenticated users, please login.";
                         }
-                        if(Session::has('errorAuthorisation')){
-                            $message = "You are not authorised for this page. Please login with a valid user or return to the homepage.";
-                        }
                         echo Session::get('errorNotLoggedIn');
                         ?>
                     </p>

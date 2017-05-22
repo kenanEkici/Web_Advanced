@@ -2,10 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d14b9189-f804-4379-9960-6fd106a103f4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WP1_WP3_WP6/src/api/database/database_config.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Web_Advanced.iml" afterPath="$PROJECT_DIR$/.idea/Web_Advanced.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WP1_WP3_WP6/api.php" afterPath="$PROJECT_DIR$/WP1_WP3_WP6/api.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WP2_WP4_WP5/public/js/authentication/login.js" afterPath="$PROJECT_DIR$/WP2_WP4_WP5/public/js/authentication/login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WP2_WP4_WP5/public/js/authentication/logout.js" afterPath="$PROJECT_DIR$/WP2_WP4_WP5/public/js/authentication/logout.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WP2_WP4_WP5/public/js/authentication/register.js" afterPath="$PROJECT_DIR$/WP2_WP4_WP5/public/js/authentication/register.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WP2_WP4_WP5/public/js/authentication/registerValidation.js" afterPath="$PROJECT_DIR$/WP2_WP4_WP5/public/js/authentication/registerValidation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/ajaxCrudEvents.js" afterPath="$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/ajaxCrudEvents.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/generateAgenda.js" afterPath="$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/generateAgenda.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/generateHome.js" afterPath="$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/generateHome.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/generateMyEvents.js" afterPath="$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/generateMyEvents.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/loadSession.js" afterPath="$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/loadSession.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WP2_WP4_WP5/resources/views/Login.blade.php" afterPath="$PROJECT_DIR$/WP2_WP4_WP5/resources/views/Login.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WP2_WP4_WP5/routes/api.php" afterPath="$PROJECT_DIR$/WP2_WP4_WP5/routes/api.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WP2_WP4_WP5/routes/web.php" afterPath="$PROJECT_DIR$/WP2_WP4_WP5/routes/web.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,28 +40,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="api.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/WP1_WP3_WP6/api.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="database_config.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WP1_WP3_WP6/src/api/database/database_config.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -76,18 +64,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/public/js/logout.js" />
-        <option value="$PROJECT_DIR$/public/js/register.js" />
-        <option value="$PROJECT_DIR$/public/css/indexMagic.css" />
-        <option value="$PROJECT_DIR$/public/js/generateEvents.js" />
-        <option value="$PROJECT_DIR$/public/js/generateMyProfile.js" />
-        <option value="$PROJECT_DIR$/resources/views/HomeLayout.blade.php" />
-        <option value="$PROJECT_DIR$/public/js/generateMyEvents.js" />
-        <option value="$PROJECT_DIR$/public/js/generateHome.js" />
-        <option value="$PROJECT_DIR$/public/js/generateviews/generateAgenda.js" />
-        <option value="$PROJECT_DIR$/public/js/generateViews.js" />
-        <option value="$PROJECT_DIR$/public/js/generateviews/generateHome.js" />
-        <option value="$PROJECT_DIR$/public/js/events.js" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/EventUserController.php" />
         <option value="$PROJECT_DIR$/resources/views/Index.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Repositories/IRepository.php" />
@@ -127,6 +103,18 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/EventController.php" />
         <option value="$PROJECT_DIR$/WP1_WP3_WP6/src/api/database/database_config.json" />
         <option value="$PROJECT_DIR$/WP1_WP3_WP6/api.php" />
+        <option value="$PROJECT_DIR$/WP2_WP4_WP5/routes/api.php" />
+        <option value="$PROJECT_DIR$/WP2_WP4_WP5/routes/web.php" />
+        <option value="$PROJECT_DIR$/WP2_WP4_WP5/resources/views/Login.blade.php" />
+        <option value="$PROJECT_DIR$/WP2_WP4_WP5/public/js/authentication/login.js" />
+        <option value="$PROJECT_DIR$/WP2_WP4_WP5/public/js/authentication/logout.js" />
+        <option value="$PROJECT_DIR$/WP2_WP4_WP5/public/js/authentication/register.js" />
+        <option value="$PROJECT_DIR$/WP2_WP4_WP5/public/js/authentication/registerValidation.js" />
+        <option value="$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/ajaxCrudEvents.js" />
+        <option value="$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/generateAgenda.js" />
+        <option value="$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/generateHome.js" />
+        <option value="$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/generateMyEvents.js" />
+        <option value="$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/loadSession.js" />
       </list>
     </option>
   </component>
@@ -204,8 +192,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
-    <option name="width" value="1932" />
-    <option name="height" value="1038" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -222,8 +211,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -233,86 +222,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Web_Advanced" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Web_Advanced" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Web_Advanced" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WP1_WP3_WP6" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Web_Advanced" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Web_Advanced" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WP1_WP3_WP6" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Web_Advanced" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Web_Advanced" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WP1_WP3_WP6" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="api" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Web_Advanced" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Web_Advanced" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WP1_WP3_WP6" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="api" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -357,17 +266,6 @@
   </component>
   <component name="RunManager" selected="JavaScript Debug.UserController.php">
     <configuration default="false" name="UserController.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Web_Advanced/app/Http/Controllers/UserController.php">
-      <method />
-    </configuration>
-    <configuration default="true" type="CodeceptionConfigurationType" factoryName="Codeception">
-      <PhpTestRunnerSettings />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
-      <node-interpreter value="project" />
-      <working-dir value="" />
-      <envs />
-      <scope-kind value="ALL" />
       <method />
     </configuration>
     <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
@@ -483,31 +381,31 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="283222000" />
+    <option name="totallyTimeSpent" value="285410000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1932" height="1038" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19331244" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19591528" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24430956" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872504" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39934534" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32565284" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39934534" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -523,19 +421,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
-    <entry file="file://$PROJECT_DIR$/database/migrations/2017_04_18_211229_add_columns_to_events.php" />
-    <entry file="file://$PROJECT_DIR$/database/migrations/2017_05_03_225058_change_ids.php" />
-    <entry file="file://$PROJECT_DIR$/database/migrations/2017_04_08_211741_create_table_users_to_events.php" />
-    <entry file="file://$PROJECT_DIR$/database/migrations/2017_04_08_211044_create_table_events.php" />
-    <entry file="file://$PROJECT_DIR$/database/migrations/2017_04_08_211034_create_table_users.php" />
-    <entry file="file://$PROJECT_DIR$/app/User.php" />
-    <entry file="file://$PROJECT_DIR$/resources/views/MyProfile.blade.php" />
-    <entry file="file://$USER_HOME$/Desktop/resources/views/master user/Layout.blade.php" />
-    <entry file="file://$PROJECT_DIR$/public/css/homepageMagic.css" />
-    <entry file="file://$PROJECT_DIR$/public/css/magicLayout.css" />
-    <entry file="file://$PROJECT_DIR$/public/css/indexMagic.css" />
-    <entry file="file://$PROJECT_DIR$/resources/views/Index.blade.php" />
     <entry file="file://$PROJECT_DIR$/public/js/authentication/logout.js" />
     <entry file="file://$PROJECT_DIR$/public/css/app.css" />
     <entry file="file://$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" />
@@ -584,6 +469,119 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WP2_WP4_WP5/routes/api.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="489">
+          <caret line="53" column="32" lean-forward="false" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WP2_WP4_WP5/resources/views/Login.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="33" column="26" lean-forward="true" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WP2_WP4_WP5/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="43" column="3" lean-forward="true" selection-start-line="43" selection-start-column="3" selection-end-line="43" selection-end-column="3" />
+          <folding>
+            <element signature="e#7#389#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WP2_WP4_WP5/public/js/authentication/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="31" column="51" lean-forward="false" selection-start-line="31" selection-start-column="51" selection-end-line="31" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WP2_WP4_WP5/public/js/authentication/logout.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="36" lean-forward="false" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WP2_WP4_WP5/public/js/authentication/register.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="77" column="21" lean-forward="false" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WP2_WP4_WP5/public/js/authentication/registerValidation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="109" column="23" lean-forward="false" selection-start-line="109" selection-start-column="23" selection-end-line="109" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/eventValidation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="94" column="0" lean-forward="true" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/generateMyEvents.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-209">
+          <caret line="77" column="81" lean-forward="false" selection-start-line="77" selection-start-column="81" selection-end-line="77" selection-end-column="81" />
+          <folding>
+            <marker date="1495480597643" expanded="true" signature="1932:1957" ph="..." />
+            <marker date="1495480597643" expanded="true" signature="3398:3418" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/generateHome.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="35" column="43" lean-forward="false" selection-start-line="35" selection-start-column="43" selection-end-line="35" selection-end-column="43" />
+          <folding>
+            <marker date="1495480522102" expanded="true" signature="1071:1086" ph="..." />
+            <marker date="1495480522102" expanded="true" signature="1339:1354" ph="..." />
+            <marker date="1495480522102" expanded="true" signature="1516:1531" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/generateAgenda.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/ajaxCrudEvents.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="59" column="18" lean-forward="false" selection-start-line="59" selection-start-column="18" selection-end-line="59" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WP2_WP4_WP5/public/js/views/loadSession.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="28" column="61" lean-forward="false" selection-start-line="28" selection-start-column="61" selection-end-line="28" selection-end-column="61" />
           <folding />
         </state>
       </provider>

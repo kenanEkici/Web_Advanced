@@ -5,12 +5,13 @@
 var userData;
 var userEvents;
 
+//laad sessie data eerst
 loadSessionData(function(data){
     userData = data;
     openEventWindow()
 });
 
-
+//haal de juiste events binnen
 function openEventWindow(){
     $('#loader').show();
     $.ajax({
@@ -25,6 +26,7 @@ function openEventWindow(){
     });
 }
 
+//genereer view
 function generateEventView(){
     var eventTable =
         $('<h2 id="numberOfEvents"></h2><br><br>' +
@@ -37,6 +39,7 @@ function generateEventView(){
 
     for(var i = 0; i < userEvents.length; i++)
     {
+        //HTML5 storage
         sessionStorage.setItem("location"+i, userEvents[i].location);
 
         var select = $('<select></select>');
@@ -72,6 +75,7 @@ function setAmountEventText(data){
     $('#numberOfEvents').text("U heeft in totaal " + data.length + " evenement(en) in uw planning");
 }
 
+//api call om een gebruiker op te zoeken adhv zoekopdrachten (mini-google-search)
 function findReference(searchkey){
     $.ajax({
        type:'GET',
