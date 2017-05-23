@@ -118,7 +118,7 @@ function postData() {
             });
     }
     else {
-        alert("post");
+        
         var data = new FormData();
         data.append("json", JSON.stringify(event));
 
