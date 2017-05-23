@@ -103,13 +103,11 @@ class EventRepository implements IEventRepository
     {
         try {
             $statement = $this->pdo->prepare('INSERT INTO events(title, organiser, start_date, end_date, location, description, invited) VALUES (:title, :organiser, :start_date, :end_date, :location, :description, :invited)');
-<<<<<<< HEAD
+
 
             $startDate = $event->start_date . " 00:00:00";
             $endDate = $event->end_date . " 00:00:00";
 
-=======
->>>>>>> origin/development
             $statement->bindParam(':title', $event->title);
             $statement->bindParam(':organiser', $event->organiser);
             $statement->bindParam(':start_date', $startDate);
@@ -130,11 +128,8 @@ class EventRepository implements IEventRepository
         try {
             $statement = $this->pdo->prepare('UPDATE events SET title = :title, organiser = :organiser, start_date = :start_date, end_date = :end_date, location = :location, description = :description, invited = :invited WHERE id = :id');
 
-<<<<<<< HEAD
             $startDate = $updatedEvent->start_date . " 00:00:00";
             $endDate = $updatedEvent->end_date ." 00:00:00";
-=======
->>>>>>> origin/development
 
             $statement->bindParam(':title', $updatedEvent->title);
             $statement->bindParam(':organiser', $updatedEvent->organiser);

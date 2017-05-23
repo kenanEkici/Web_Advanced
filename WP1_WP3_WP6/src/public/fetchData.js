@@ -23,10 +23,6 @@ function fetchData() {
         });
     }
     else if ($("#select").val() == "Owner Id") {
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/development
         fetch(url + '/events/person/' + idValue, {
             method: 'get'
         }).then(function (response) {
