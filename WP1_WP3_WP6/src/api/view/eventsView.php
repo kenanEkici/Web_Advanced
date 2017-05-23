@@ -15,14 +15,14 @@ echo
     <label>Zoeken op: </label><select id='select'><option>Event Id</option><option>Owner Id</option><option>Between dates</option><option>Owner ID and between dates</option></select>
     <input id='idInput' type='number' placeholder='Geef ID in' min='1' max='999'>
 <div id='dateDiv'>
-    <label>Startdatum:<input id='startDateInput' type='datetime'></label>
-    <label>Einddatum:<input id='endDateInput' type='datetime'></label>
+    <label>Startdatum:<input id='startDateInput' type='datetime-local'></label>
+    <label>Einddatum:<input id='endDateInput' type='datetime-local'></label>
 </div>
 
 <input id='fetchButton' onclick='fetchData()' value='Haal events op' type='button'>
 <input id='addButton' onclick='openExtraWindow()' value='Voeg events toe' type='button'>
 
-    <form method='post' name='event' action='/events'>
+    <form>
             <div id='hiddenForm' hidden >
             <label>Titel</label>
             <input id='title'  type='text'><br>
@@ -31,9 +31,9 @@ echo
             <label>Description</label>
             <input id='description' type='text'><br>
             <label>Start Date</label>
-            <input id='startDate' type='datetime'><br>
+            <input id='startDate' type='datetime-local'><br>
             <label>End Date</label>
-            <input id='endDate' type='datetime'><br>
+            <input id='endDate' type='datetime-local'><br>
             <label>Location</label>
             <input id='location' type='text'><br>
             <label>Invited Coworkers</label>
