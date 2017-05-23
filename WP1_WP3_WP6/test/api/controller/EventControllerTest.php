@@ -160,7 +160,7 @@ class EventControllerTest extends \PHPUnit\Framework\TestCase
      * getEventByID(int $eventID)
      * Testing if the controller returns null when the event does not exist
      */
-    function test_getEventById_EventNotFound_returnsEventNotFoundString()
+    function test_getEventById_EventNotFound_returnsErrorString()
     {
         $user = "web07_db";
         $password = "web07";
@@ -212,7 +212,7 @@ class EventControllerTest extends \PHPUnit\Framework\TestCase
      * getEventByOwnerID(int $ownerID)
      * Testing if the controller returns null when the event does not exist
      */
-    function test_getEventByOwnerId_EventNotFound_returnsEventNotFoundString()
+    function test_getEventByOwnerId_EventNotFound_returnsErrorString()
     {
         $user = "web07_db";
         $password = "web07";
@@ -234,13 +234,253 @@ class EventControllerTest extends \PHPUnit\Framework\TestCase
         $this->expectOutputString(sprintf("%s", "User not found or user does not have any events"));
     }
 
-
     /**
-     * getEventBetweenDatzes(int $ownerID)
-     *
+     * getEventsByDate($fromDate, $untilDate)
+     * Testing if the controller returns a list of events when events are found.
      */
-    function test_getEventsBetweenDates_EventNotFound_returns(){
-        
+    function test_getEventsByDate_EventsFound_ReturnsListOfEvents()
+    {
+
+        $user = "web07_db";
+        $password = "web07";
+        $database = "web07_db";
+        $hostname = "213.136.26.180";
+        $pdo = null;
+        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $event1 = $this->makeEvent("1");
+        $event2 = $this->makeEvent("2");
+
+        $events = array($event1, $event2);
+        $this->mockEventRepository = $this->getMockBuilder('model\IEventRepository')->getMock();
+        $this->mockEventRepository->expects($this->atLeastOnce())->method('getEventByDate')->will($this->returnValue($events));
+
+
+        $EventController = new EventController($this->mockEventRepository);
+        $EventController->getEventsByDate('2000-01-01', '2020-02-03');
+
+
+        $this->expectOutputString(sprintf("%s", json_encode($events)));
     }
 
+    /**
+     * getEventsByDate($fromDate, $untilDate)
+     * Testing if the controller returns "No event found, try another date interval" when the event does not exist
+     */
+    function test_getEventsByDate_EventNotFound_returnsErrorString()
+    {
+        $user = "web07_db";
+        $password = "web07";
+        $database = "web07_db";
+        $hostname = "213.136.26.180";
+        $pdo = null;
+
+
+        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $event = [];
+
+        $this->mockEventRepository = $this->getMockBuilder('model\IEventRepository')->getMock();
+        $this->mockEventRepository->expects($this->atLeastOnce())->method('getEventByDate')->will($this->returnValue($event));
+
+        $EventController = new EventController($this->mockEventRepository);
+        $EventController->getEventsByDate('2017-05-23', '2017-06-01');
+        $this->expectOutputString(sprintf("%s", "No event found, try another date interval"));
+    }
+
+    /**
+     *  getEventsByPersonAndDate($personId, $fromDate, $untilDate)
+     * Testing if the controller returns a list of events when there events are found.
+     */
+    function test_getEventsByPersonAndDate_EventsFound_ReturnsListOfEvents()
+    {
+        $user = "web07_db";
+        $password = "web07";
+        $database = "web07_db";
+        $hostname = "213.136.26.180";
+        $pdo = null;
+        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $event1 = $this->makeEvent("1");
+        $event2 = $this->makeEvent("2");
+
+        $events = array($event1, $event2);
+        $this->mockEventRepository = $this->getMockBuilder('model\IEventRepository')->getMock();
+        $this->mockEventRepository->expects($this->atLeastOnce())->method('getEventByPersonAndDate')->will($this->returnValue($events));
+
+
+        $EventController = new EventController($this->mockEventRepository);
+        $EventController->getEventByPersonAndDate('0', '2000-01-01', '2020-02-03');
+
+        $this->expectOutputString(sprintf("%s", json_encode($events)));
+    }
+
+    /**
+     *  getEventsByPersonAndDate($personId, $fromDate, $untilDate)
+     * Testing if the controller returns a list of events when there events are found.
+     */
+    function test_getEventsByPersonAndDate_EventsNotFound_ReturnsErrorString()
+    {
+        $user = "web07_db";
+        $password = "web07";
+        $database = "web07_db";
+        $hostname = "213.136.26.180";
+        $pdo = null;
+        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+        $events = [];
+        $this->mockEventRepository = $this->getMockBuilder('model\IEventRepository')->getMock();
+        $this->mockEventRepository->expects($this->atLeastOnce())->method('getEventByPersonAndDate')->will($this->returnValue($events));
+
+
+        $EventController = new EventController($this->mockEventRepository);
+        $EventController->getEventByPersonAndDate('0', '2000-01-01', '2020-02-03');
+
+        $this->expectOutputString(sprintf("%s", "No event found, try other parameters"));
+    }
+
+    /**
+     * postEvent($newEvent)
+     * Testing if the controller returns the amount of lines changed when changing an event.
+     */
+    function test_PostEvent_EventChanged_ReturnsAmountOfRowsChanged()
+    {
+        $user = "web07_db";
+        $password = "web07";
+        $database = "web07_db";
+        $hostname = "213.136.26.180";
+        $pdo = null;
+        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $event1 = $this->makeEvent("1");
+        $events = json_encode($event1);
+        $this->mockEventRepository = $this->getMockBuilder('model\IEventRepository')->getMock();
+        $this->mockEventRepository->expects($this->atLeastOnce())->method('storeEvent')->will($this->returnValue(1));
+        $EventController = new EventController($this->mockEventRepository);
+        $EventController->postEvent($events);
+
+        $this->expectOutputString(sprintf("%s", '1'));
+    }
+
+    /**
+     * postEvent($newEvent)
+     * Testing if the controller returns an errortext when the new Event can't be added to the database.
+     */
+    function test_PostEvent_EventNotChanged_ReturnsErrorString()
+    {
+        $user = "web07_db";
+        $password = "web07";
+        $database = "web07_db";
+        $hostname = "213.136.26.180";
+        $pdo = null;
+        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $event1 = $this->makeEvent("1");
+        $events = json_encode($event1);
+        $this->mockEventRepository = $this->getMockBuilder('model\IEventRepository')->getMock();
+        $this->mockEventRepository->expects($this->atLeastOnce())->method('storeEvent')->will($this->returnValue(0));
+
+
+        $EventController = new EventController($this->mockEventRepository);
+        $EventController->postEvent($events);
+
+        $this->expectOutputString(sprintf("%s", 'Error while posting the event'));
+    }
+
+    /**
+     * putEvent($newEvent)
+     * Testing if the controller returns the amount of lines changed when changing an event.
+     */
+    function test_PutEvent_EventChanged_ReturnsAmountOfRowsChanged()
+    {
+        $user = "web07_db";
+        $password = "web07";
+        $database = "web07_db";
+        $hostname = "213.136.26.180";
+        $pdo = null;
+        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $event1 = $this->makeEvent("1");
+        $events = json_encode($event1);
+        $this->mockEventRepository = $this->getMockBuilder('model\IEventRepository')->getMock();
+        $this->mockEventRepository->expects($this->atLeastOnce())->method('editEvent')->will($this->returnValue(1));
+
+        $EventController = new EventController($this->mockEventRepository);
+        $EventController->putEvent($event1->id, $events);
+
+        $this->expectOutputString(sprintf("%s", '1'));
+    }
+
+    /**
+     * postEvent($newEvent)
+     * Testing if the controller returns an errortext when the new Event can't be added to the database.
+     */
+    function test_PutEvent_EventNotChanged_ReturnsErrorString()
+    {
+        $user = "web07_db";
+        $password = "web07";
+        $database = "web07_db";
+        $hostname = "213.136.26.180";
+        $pdo = null;
+        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $event1 = $this->makeEvent("1");
+        $events = json_encode($event1);
+        $this->mockEventRepository = $this->getMockBuilder('model\IEventRepository')->getMock();
+        $this->mockEventRepository->expects($this->atLeastOnce())->method('editEvent')->will($this->returnValue(0));
+
+
+        $EventController = new EventController($this->mockEventRepository);
+        $EventController->putEvent($event1->id, $events);
+
+        $this->expectOutputString(sprintf("%s", 'Error while updating the event'));
+    }
+
+    function test_DeleteEvent_EventChanged_returnsAmountOfRowsChanged(){
+        $user = "web07_db";
+        $password = "web07";
+        $database = "web07_db";
+        $hostname = "213.136.26.180";
+        $pdo = null;
+        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $event1 = $this->makeEvent("1");
+        $this->mockEventRepository = $this->getMockBuilder('model\IEventRepository')->getMock();
+        $this->mockEventRepository->expects($this->atLeastOnce())->method('deleteEvent')->will($this->returnValue(1));
+
+        $EventController = new EventController($this->mockEventRepository);
+        $EventController->deleteEvent($event1->id);
+
+        $this->expectOutputString(sprintf("%s", '1'));
+    }
+
+    function test_DeleteEvent_EventNotChanged_ReturnsErrorString(){
+        $user = "web07_db";
+        $password = "web07";
+        $database = "web07_db";
+        $hostname = "213.136.26.180";
+        $pdo = null;
+        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $event1 = $this->makeEvent("1");
+        $this->mockEventRepository = $this->getMockBuilder('model\IEventRepository')->getMock();
+        $this->mockEventRepository->expects($this->atLeastOnce())->method('deleteEvent')->will($this->returnValue(0));
+
+
+        $EventController = new EventController($this->mockEventRepository);
+        $EventController->deleteEvent($event1->id);
+
+        $this->expectOutputString(sprintf("%s", 'Error while deleting the event'));
+    }
 }

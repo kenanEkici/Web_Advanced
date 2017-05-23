@@ -63,7 +63,7 @@ class EventController
         }
     }
 
-    public function getEventsByPersonAndDate($personId, $fromDate, $untilDate)
+    public function getEventByPersonAndDate($personId, $fromDate, $untilDate)
     {
         $event = $this->EventRepository->getEventByPersonAndDate($personId,$fromDate,$untilDate);
 
@@ -77,7 +77,6 @@ class EventController
         }
     }
 
-    //CRUD functions don't have any output, so I can only test if they are calling the repository.
     public function postEvent($newEvent)
     {
        $event = new Event();
@@ -92,7 +91,14 @@ class EventController
        $event->invited = $arr['invited'];
        $event->event_ownerId = $arr['event_ownerId'];
 
-      $this->EventRepository->storeEvent($event);
+      $rowsChanged =  $this->EventRepository->storeEvent($event);
+      if($rowsChanged == 1){
+          echo $rowsChanged;
+      }
+      else{
+          echo "Error while posting the event";
+      }
+
     }
 
     public function putEvent($id, $newEvent)
@@ -108,11 +114,24 @@ class EventController
         $updatedEvent->organiser = $arr['organiser'];
         $updatedEvent->invited = $arr['invited'];
         $updatedEvent->event_ownerId = $arr['event_ownerId'];
-        $this->EventRepository->editEvent($id, $updatedEvent);
+        $rowsChanged = $this->EventRepository->editEvent($id, $updatedEvent);
+
+        if($rowsChanged == 1){
+            echo $rowsChanged;
+        }
+        else{
+            echo "Error while updating the event";
+        }
     }
 
     public function deleteEvent($id)
     {
-        $this->EventRepository->deleteEvent($id);
+        $rowsChanged = $this->EventRepository->deleteEvent($id);
+        if($rowsChanged == 1){
+            echo $rowsChanged;
+        }
+        else {
+            echo "Error while deleting the event";
+        }
     }
 }
