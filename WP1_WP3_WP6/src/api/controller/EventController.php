@@ -20,10 +20,6 @@ class EventController
         echo json_encode($events);
     }
 
-    public function getAllUsers()
-    {
-        echo json_encode($this->EventRepository-> getAllUsers());
-    }
 
     public function getEventById($eventId)
     {

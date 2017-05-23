@@ -14,8 +14,6 @@ interface IEventRepository
 
     function getAllEvents();
 
-    function getAllUsers();
-
     function getEventByID($eventID);
 
     function getEventByOwnerId($personID);

@@ -15,12 +15,12 @@ echo
 <label>Zoeken op: </label><select id='select'><option>Event Id</option><option>Owner Id</option><option>Between dates</option><option>Owner ID and between dates</option></select>
 <input id='idInput' type='number' min='1' max='999'>
 <div id='dateDiv'>
-    <label style='float: left'>Startdatum:</label><input id='startDateInput' type='date'>
-    <label style='float: left'>Einddatum: </label><input id='endDateInput' type='date'>
+    <label>Startdatum:<input id='startDateInput' type='date'></label>
+    <label>Einddatum:<input id='endDateInput' type='date'></label>
 </div>
 
-<input id='fetchButton' onclick='fetchData()' value='Haal op' type='button'>
-<input id='addButton' onclick='openExtraWindow()' value='Voeg toe' type='button'>
+<input id='fetchButton' onclick='fetchData()' value='Haal events op' type='button'>
+<input id='addButton' onclick='openExtraWindow()' value='Voeg events toe' type='button'>
 
 <form method='post' name='event' action='/events'>
 <div id='hiddenForm' hidden >
@@ -48,7 +48,8 @@ echo
 <div class='container'>
     <table>
          <thead><tr>
-            <th scope=\"col\">Title</th>
+            <th scope=\"col\">Event ID</th>
+            <th>Title</th>
             <th>Organiser</th>
             <th>Description</th>
             <th>Start date</th>

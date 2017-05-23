@@ -80,7 +80,7 @@ function fetchData() {
 function updateRows() {
     emptyView();
     for (var i = 0; i < eventArr.length; i++) {
-        var row = $('<tr><td>' + eventArr[i].title + '</td><td>' + eventArr[i].organiser + '</td><td>' + eventArr[i].description + '</td><td>' + eventArr[i].start_date + '</td><td>' + eventArr[i].end_date + '</td><td>' + eventArr[i].location + '</td><td>' + eventArr[i].invited + '</td><td>' + eventArr[i].event_ownerId +'</td></tr>')
+        var row = $('<tr><td>' + eventArr[i].id +'</td><td>'+ eventArr[i].title + '</td><td>' + eventArr[i].organiser + '</td><td>' + eventArr[i].description + '</td><td>' + eventArr[i].start_date + '</td><td>' + eventArr[i].end_date + '</td><td>' + eventArr[i].location + '</td><td>' + eventArr[i].invited + '</td><td>' + eventArr[i].event_ownerId +'</td></tr>')
         $("#contentBody").append(row);
     }
 }

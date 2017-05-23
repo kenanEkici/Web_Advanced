@@ -29,20 +29,6 @@ class EventRepository implements IEventRepository
         }
     }
 
-    function getAllUsers()
-    {
-        try {
-
-            $statement = $this->pdo->prepare('SELECT * FROM users');
-            $statement->execute();
-            $result_array = $statement->fetchAll(PDO::FETCH_CLASS, __NAMESPACE__ . "\\User");
-
-            return $result_array;
-
-        } catch (PDOException $e) {
-            print 'Exception!: ' . $e->getMessage();
-        }
-    }
 
     function getEventByID($eventID)
     {
@@ -121,14 +107,17 @@ class EventRepository implements IEventRepository
 
             $statement = $this->pdo->prepare('INSERT INTO events(title, organiser, start_date, end_date, location, description, invited) VALUES (:title, :organiser, :start_date, :end_date, :location, :description, :invited)');
 
+            $startDate = $event->start_date . " 00:00:00";
+            $endDate = $event->end_date . " 00:00:00";
+
             $statement->bindParam(':title', $event->title);
             $statement->bindParam(':organiser', $event->organiser);
-            $statement->bindParam(':start_date', $event->start_date);
-            $statement->bindParam(':end_date', $event->end_date);
+            $statement->bindParam(':start_date', $startDate);
+            $statement->bindParam(':end_date', $endDate);
             $statement->bindParam(':location', $event->location);
             $statement->bindParam(':description', $event->description);
             $statement->bindParam(':invited', $event->invited);
-            $statement->execute();
+            return $statement->execute();
 
         } catch
         (PDOException $e) {
@@ -141,10 +130,13 @@ class EventRepository implements IEventRepository
         try {
             $statement = $this->pdo->prepare('UPDATE events SET title = :title, organiser = :organiser, start_date = :start_date, end_date = :end_date, location = :location, description = :description, invited = :invited WHERE id = :id');
 
+            $startDate = $updatedEvent->start_date . " 00:00:00";
+            $endDate = $updatedEvent->end_date ." 00:00:00";
+
             $statement->bindParam(':title', $updatedEvent->title);
             $statement->bindParam(':organiser', $updatedEvent->organiser);
-            $statement->bindParam(':start_date', $updatedEvent->start_date);
-            $statement->bindParam(':end_date', $updatedEvent->end_date);
+            $statement->bindParam(':start_date', $startDate);
+            $statement->bindParam(':end_date', $endDate);
             $statement->bindParam(':location', $updatedEvent->location);
             $statement->bindParam(':description', $updatedEvent->description);
             $statement->bindParam(':invited', $updatedEvent->invited);
