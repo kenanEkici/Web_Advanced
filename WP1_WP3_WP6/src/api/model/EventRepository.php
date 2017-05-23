@@ -17,7 +17,6 @@ class EventRepository implements IEventRepository
     function getAllEvents()
     {
         try {
-
             $statement = $this->pdo->prepare('SELECT * FROM events');
             $statement->execute();
             $result_array = $statement->fetchAll(PDO::FETCH_CLASS, __NAMESPACE__ . "\\Event");
@@ -63,7 +62,6 @@ class EventRepository implements IEventRepository
     function getEventByOwnerId($personID)
     {
         try {
-
             $statement = $this->pdo->prepare('SELECT * FROM events WHERE event_ownerId = :personid ');
             $statement->bindParam(':personid', $personID);
             $statement->execute();
@@ -118,9 +116,7 @@ class EventRepository implements IEventRepository
     function storeEvent($event)
     {
         try {
-
             $statement = $this->pdo->prepare('INSERT INTO events(title, organiser, start_date, end_date, location, description, invited) VALUES (:title, :organiser, :start_date, :end_date, :location, :description, :invited)');
-
             $statement->bindParam(':title', $event->title);
             $statement->bindParam(':organiser', $event->organiser);
             $statement->bindParam(':start_date', $event->start_date);
@@ -128,7 +124,7 @@ class EventRepository implements IEventRepository
             $statement->bindParam(':location', $event->location);
             $statement->bindParam(':description', $event->description);
             $statement->bindParam(':invited', $event->invited);
-            $statement->execute();
+            return $statement->execute();
 
         } catch
         (PDOException $e) {
@@ -141,6 +137,7 @@ class EventRepository implements IEventRepository
         try {
             $statement = $this->pdo->prepare('UPDATE events SET title = :title, organiser = :organiser, start_date = :start_date, end_date = :end_date, location = :location, description = :description, invited = :invited WHERE id = :id');
 
+
             $statement->bindParam(':title', $updatedEvent->title);
             $statement->bindParam(':organiser', $updatedEvent->organiser);
             $statement->bindParam(':start_date', $updatedEvent->start_date);
@@ -149,7 +146,7 @@ class EventRepository implements IEventRepository
             $statement->bindParam(':description', $updatedEvent->description);
             $statement->bindParam(':invited', $updatedEvent->invited);
             $statement->bindParam(':id', $id);
-            $statement->execute();
+            return $statement->execute();
 
         } catch
         (PDOException $e) {
@@ -164,7 +161,7 @@ class EventRepository implements IEventRepository
 
             $statement = $this->pdo->prepare('DELETE FROM events WHERE id = :id');
             $statement->bindParam(':id',$id);
-            $statement->execute();
+            return $statement->execute();
 
         } catch
         (PDOException $e) {

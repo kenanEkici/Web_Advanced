@@ -23,7 +23,6 @@ function fetchData() {
         });
     }
     else if ($("#select").val() == "Owner Id") {
-        alert("got dem tables");
         fetch(url + '/events/person/' + idValue, {
             method: 'get'
         }).then(function (response) {

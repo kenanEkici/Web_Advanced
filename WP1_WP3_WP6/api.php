@@ -8,7 +8,7 @@ $router = new AltoRouter();
 //WERKPAKKET 6 database configs
 
 //getting database configs from json file
-$getJsonData = file_get_contents("src/api/database/database_configs.json");
+$getJsonData = file_get_contents("src/api/database/database_config.json");
 
 //decode the data we get from json
 $decodedJsonData = json_decode($getJsonData,true);
