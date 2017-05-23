@@ -59,8 +59,7 @@ function deleteEvent(id){
         url: "api/events",
         data: obj,
         success: function(data) {
-            emptyView();
-            openEventWindow();
+            location.reload();
         },
         error: function(xhr, textStatus, thrownError) {
             alert('Fout bij het verwijderen van event');
