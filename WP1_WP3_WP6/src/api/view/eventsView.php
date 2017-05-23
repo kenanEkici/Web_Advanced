@@ -31,9 +31,9 @@ echo
 <label>Description</label>
 <input id='description' type='text'><br>
 <label>Start Date</label>
-<input id='startDate' type='datetime'><br>
+<input id='startDate' type='date'><br>
 <label>End Date</label>
-<input id='endDate' type='datetime'><br>
+<input id='endDate' type='date'><br>
 <label>Location</label>
 <input id='location' type='text'><br>
 <label>Invited Coworkers</label>

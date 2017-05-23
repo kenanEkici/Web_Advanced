@@ -23,7 +23,7 @@ function fetchData() {
         });
     }
     else if ($("#select").val() == "Owner Id") {
-        alert("got dem tables");
+
         fetch(url + '/events/person/' + idValue, {
             method: 'get'
         }).then(function (response) {
@@ -130,13 +130,13 @@ function emptyView() {
 
 function openExtraWindow() {
     if (opened) {
-        $('#nav').css('height', 200);
+        $('#nav').css('height', 350);
         $('#hiddenForm').hide();
         $('#addButton').val("Voeg toe")
         opened = false;
     }
     else {
-        $('#nav').css('height', 900);
+        $('#nav').css('height', 1050);
         $('#hiddenForm').show();
         $('#addButton').val("Annuleer")
         opened = true;
