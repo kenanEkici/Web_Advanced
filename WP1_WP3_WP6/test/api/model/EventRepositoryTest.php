@@ -34,15 +34,15 @@ class EventRepositoryTest extends TestCase
 
         //Creating a testEvent
         $newEvent = $this->makeEvent("TEST");
-
+        print("test: " . $newEvent->start_date);
         //Posting the event to the table.
         $rowsChanged = $this->_repository->storeEvent($newEvent);
 
+        //Asserting that 1 row has been changed during the posting.
+        self::assertEquals(1, $rowsChanged);
+
         //The size of the DB table after posting the event.
         $EventsCountAfter = sizeof($this->_repository->getAllEvents());
-
-        //Asserting that 1 row has been changed during the posting.
-        self::assertTrue($rowsChanged == 1);
 
         //Assert that we can get the event from the database based on the ID
         self::assertTrue($EventsCountAfter == ($EventsCountBefore + 1));
@@ -118,10 +118,54 @@ class EventRepositoryTest extends TestCase
         self::assertEquals($CountAfterDeleting, $CountBeforeDeleting - 1);
         self::assertEquals($CountBeforeStoring,$CountAfterDeleting);
 
+    }
 
+    /**
+     * Test to successfully get all the events in the database
+     */
+    function test_getAllEvents_SuccessfullyGetAllEvents(){
+
+        //Manipulate the datase so the getAllEvents will be
+
+        //GetAllEvents
+        $EventsBeforeManipulation = $this->_repository->getAllEvents();
+        $CountBeforeManipulation = sizeof($EventsBeforeManipulation);
+
+        //MakeEvent
+        $newEvent = $this->makeEvent("TEST");
+
+        //StoreAnEvent
+        $rowChanged = $this->_repository->storeEvent($newEvent);
+        self::assertEquals(1, $rowChanged);
+
+        //GetIDofEvent
+        $eventID = $this->getIDOfTestEvent($this->_repository->getAllEvents(), "TEST");
+
+        //DeleteAnEvent
+        $rowChanged = $this->_repository->deleteEvent($eventID);
+        self::assertEquals(1, $rowChanged);
+
+        //GetAllEvents
+        $EventsAfterManipulation = $this->_repository->getAllEvents();
+        $CountAfterManipulation = sizeof($EventsAfterManipulation);
+
+        //Check dat ze gelijk zijn.
+        self::assertEquals($EventsBeforeManipulation, $EventsAfterManipulation);
+        self::assertEquals($CountBeforeManipulation, $CountAfterManipulation);
 
     }
 
+    /**
+     * Test to successfully get an event by ID if it exists
+     */
+    function test_getEventByID_SuccessfullGetEvent(){
+        
+    }
+
+
+    /**
+     * Helper functions
+     */
     protected function setUp()
     {
         $user = "web07_db";

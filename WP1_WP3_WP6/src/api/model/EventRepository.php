@@ -107,8 +107,8 @@ class EventRepository implements IEventRepository
 
             $statement->bindParam(':title', $event->title);
             $statement->bindParam(':organiser', $event->organiser);
-            $statement->bindParam(':start_date', $event->startDate);
-            $statement->bindParam(':end_date', $event->endDate);
+            $statement->bindParam(':start_date', $event->start_date);
+            $statement->bindParam(':end_date', $event->end_date);
             $statement->bindParam(':location', $event->location);
             $statement->bindParam(':description', $event->description);
             $statement->bindParam(':invited', $event->invited);

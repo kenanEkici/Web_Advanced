@@ -314,7 +314,7 @@ class EventControllerTest extends TestCase
 
 
         $EventController = new EventController($this->mockEventRepository);
-        $EventController->getEventByPersonAndDate('0', '2000-01-01', '2020-02-03');
+        $EventController->getEventsByPersonAndDate('0', '2000-01-01 15:00', '2020-02-03');
 
         $this->expectOutputString(sprintf("%s", json_encode($events)));
     }
@@ -340,7 +340,7 @@ class EventControllerTest extends TestCase
 
 
         $EventController = new EventController($this->mockEventRepository);
-        $EventController->getEventByPersonAndDate('0', '2000-01-01', '2020-02-03');
+        $EventController->getEventsByPersonAndDate('0', '2000-01-01', '2020-02-03');
 
         $this->expectOutputString(sprintf("%s", "No event found, try other parameters"));
     }
