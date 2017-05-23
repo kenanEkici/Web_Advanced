@@ -18,7 +18,7 @@ $database = $decodedJsonData['database'][0]['database_name'];
 $hostname = $decodedJsonData['database'][0]['hostname'];
 
 
-// WERKPAKKET 1 database configs
+// WERKPAKKET 1 / 3 database configs
 /*$user = "web07_db";
 $password = "web07";
 $database = "web07_db";
