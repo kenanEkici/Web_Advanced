@@ -1,7 +1,13 @@
+//variable for storing the retrieved events
 var eventArr;
+
+//to verify whether the extra register window has opened
 var opened = false;
+
+//URL van webserver
 var url = "http://192.168.33.22";
 
+//JAVASCRIPT FETCH statement om events binnen te halen
 function fetchData() {
     var idValue = $('#idInput').val();
     var startDate = $('#startDateInput').val();
@@ -55,12 +61,12 @@ function fetchData() {
         });
     }
     else if ($("#select").val() == "Owner ID and between dates") {
-        //alert('Owner ID and between dates : startDate = ' + startDate + ' endDate : ' + endDate + ' personId: ' + idValue);
-        alert(url + '/events/person/' + idValue + '/' + startDate + '/' + endDate);
+
         fetch(url + '/events/person/' + idValue + '/' + startDate + '/' + endDate,{
             method: 'get'
         }).then(function (response) {
             response.json().then(function (result) {
+                //retrieve the results and store it locally
                 eventArr = result;
                 updateRows();
 
@@ -76,6 +82,7 @@ function fetchData() {
     }
 }
 
+//clear the table and fill it with the entries of the fetched data from the api
 function updateRows() {
     emptyView();
     for (var i = 0; i < eventArr.length; i++) {
@@ -85,7 +92,7 @@ function updateRows() {
 }
 
 
-// Posting and Putting data
+//If a certain id is given, execute a put, else a post
 function postData() {
     var event = {
         title: $("#title").val(),
@@ -123,10 +130,12 @@ function postData() {
     }
 }
 
+//empty the table
 function emptyView() {
     $("#contentBody").empty();
 }
 
+//Resize the header so the registration page is visible
 function openExtraWindow() {
     if (opened) {
         $('#nav').css('height', 350);
