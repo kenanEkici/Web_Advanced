@@ -1,5 +1,6 @@
 <?php namespace model;
 
+//Model for our event object
 class Event
 {
     public $id;

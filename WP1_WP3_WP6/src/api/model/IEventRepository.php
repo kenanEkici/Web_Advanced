@@ -7,7 +7,6 @@
  */
 
 
-
 interface IEventRepository
 {
     function __construct($pdo);

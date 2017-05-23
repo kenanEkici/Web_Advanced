@@ -13,14 +13,14 @@ class EventController
         $this->EventRepository =  $eventRepository;
     }
 
-    //get and encode all evenst to json
+    //Requesting all events
     public function getAllEvents()
     {
         $events = $this->EventRepository->getAllEvents();
         echo json_encode($events);
     }
 
-    //get and encode get events by id to json
+    //Requesting events by event_id only
     public function getEventById($eventId)
     {
         $event = $this->EventRepository->getEventByID($eventId);
@@ -35,7 +35,7 @@ class EventController
         }
     }
 
-    //get and encode owner id to json
+    //Requesting events by a person (who originally created the event)
     public function getEventsByOwnerId($personId)
     {
         $event = $this->EventRepository->getEventByOwnerId($personId);
@@ -50,7 +50,7 @@ class EventController
         }
     }
 
-    // get and encode events by date to json
+    //Requesting events between a certain date
     public function getEventsByDate($fromDate, $untilDate)
     {
         $event = $this->EventRepository->getEventByDate($fromDate, $untilDate);
@@ -65,7 +65,7 @@ class EventController
         }
     }
 
-    // get and encode events by owner id, start_date and end_date
+    //Requesting events by person id AND between a certain date
     public function getEventsByPersonAndDate($personId, $fromDate, $untilDate)
     {
         $event = $this->EventRepository->getEventByPersonAndDate($personId,$fromDate,$untilDate);
@@ -80,12 +80,13 @@ class EventController
         }
     }
 
-    // decode event from json and send to eventRepository to insert into database
+    //Decode incoming request from json to array to eventually store it in the db
     public function postEvent($newEvent)
     {
        $event = new Event();
        $arr = json_decode($newEvent,true);
 
+       //assigning all the incoming properties to the object
        $event->title = $arr['title'];
        $event->description = $arr['description'];
        $event->location = $arr['location'];
@@ -104,7 +105,7 @@ class EventController
       }
 
     }
-    // decode event from json and sed to eventrepository to change the event in the database
+    //Edit an event by decoding the incoming request and replacing the original object with the updated one
     public function putEvent($id, $newEvent)
     {
         $updatedEvent = new Event();
@@ -127,7 +128,8 @@ class EventController
             echo "Error while updating the event";
         }
     }
-    // Delete event
+
+    // Delete event by a given ID
     public function deleteEvent($id)
     {
         $rowsChanged = $this->EventRepository->deleteEvent($id);

@@ -8,12 +8,13 @@ class EventRepository implements IEventRepository
     private
         $pdo = null;
 
+    //parse PDO object to our repo in order to query our database
     function __construct($pdo)
     {
         $this->pdo = $pdo;
     }
 
-//Database connections with queries
+    //Prepared statement for retrieving all the events from the events table
     function getAllEvents()
     {
         try {
@@ -28,7 +29,7 @@ class EventRepository implements IEventRepository
         }
     }
 
-    // get events by it from the database
+    //Prepared statement for retrieving a single event by an event id
     function getEventByID($eventID)
     {
         try {
@@ -45,7 +46,7 @@ class EventRepository implements IEventRepository
         }
     }
 
-    //get events by owner id from the database
+    //Prepared statement for retrieving a single event by a person id
     function getEventByOwnerId($personID)
     {
         try {
@@ -61,15 +62,14 @@ class EventRepository implements IEventRepository
         }
     }
 
-    // get events by date from the database
-    function getEventByDate($from, $until) // "yyyy-mm-dd'
+    //Prepared statement for retrieving all the events between a certain date range
+    function getEventByDate($from, $until) // "yyyy-mm-dd' --> datetime format
     {
         try {
-            $start  = $from . " 00:00:00";
-            $end = $until . " 00:00:00";
+
             $statement = $this->pdo->prepare('SELECT * FROM events WHERE start_date >= :start and end_date <= :eind ');
-            $statement->bindParam(':start', $start);
-            $statement->bindParam(':eind', $end);
+            $statement->bindParam(':start', $from);
+            $statement->bindParam(':eind', $until);
             $statement->execute();
             $result_array = $statement->fetchAll(PDO::FETCH_CLASS,__NAMESPACE__ . "\\Event");
 
@@ -80,19 +80,15 @@ class EventRepository implements IEventRepository
         }
     }
 
-    // get events by person and date from the database
+    //Prepared statement for retrieving all the events between a certain date range AND
     function getEventByPersonAndDate($personID, $from, $until)
     {
         try {
 
-
-            $start  = $from . " 00:00:00";
-            $end = $until . " 00:00:00";
-
             $statement = $this->pdo->prepare('SELECT * FROM events WHERE event_ownerId = :personid and start_date >= :start and end_date <= :eind');
             $statement->bindParam(':personid', $personID);
-            $statement->bindParam(':start',$start);
-            $statement->bindParam(':eind', $end);
+            $statement->bindParam(':start',$from);
+            $statement->bindParam(':eind', $until);
             $statement->execute();
             $result_array = $statement->fetchAll(PDO::FETCH_CLASS,__NAMESPACE__ . "\\Event");
             return $result_array;
@@ -103,20 +99,16 @@ class EventRepository implements IEventRepository
         }
     }
 
-    // POST event into Database
+    //Prepared statement for storing an event object in the database
     function storeEvent($event)
     {
         try {
             $statement = $this->pdo->prepare('INSERT INTO events(title, organiser, start_date, end_date, location, description, invited) VALUES (:title, :organiser, :start_date, :end_date, :location, :description, :invited)');
 
-
-            $startDate = $event->start_date . " 00:00:00";
-            $endDate = $event->end_date . " 00:00:00";
-
             $statement->bindParam(':title', $event->title);
             $statement->bindParam(':organiser', $event->organiser);
-            $statement->bindParam(':start_date', $startDate);
-            $statement->bindParam(':end_date', $endDate);
+            $statement->bindParam(':start_date', $event->startDate);
+            $statement->bindParam(':end_date', $event->endDate);
             $statement->bindParam(':location', $event->location);
             $statement->bindParam(':description', $event->description);
             $statement->bindParam(':invited', $event->invited);
@@ -128,7 +120,7 @@ class EventRepository implements IEventRepository
         }
     }
 
-    // PUT == Change event in the database by id
+    //Prepared statement for editing an existing event object in the database
     function editEvent($id, $updatedEvent)
     {
         try {
@@ -153,11 +145,10 @@ class EventRepository implements IEventRepository
         }
     }
 
-    // Delete event from database
+    //Prepared statement for deleting an event by a given ID
     function deleteEvent($id)
     {
         try {
-
 
             $statement = $this->pdo->prepare('DELETE FROM events WHERE id = :id');
             $statement->bindParam(':id',$id);
