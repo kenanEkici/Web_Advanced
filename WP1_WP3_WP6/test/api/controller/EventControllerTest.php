@@ -10,11 +10,12 @@ namespace test\api\controller;
 
 use controller\EventController;
 use model\Event;
+use \PHPUnit\Framework\TestCase;
 use PDO;
 
 require_once "vendor\autoload.php";
 
-class EventControllerTest extends \PHPUnit\Framework\TestCase
+class EventControllerTest extends TestCase
 {
     private $mockEventRepository;
 

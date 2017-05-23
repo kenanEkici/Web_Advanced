@@ -151,7 +151,6 @@ class EventRepository implements IEventRepository
     {
         try {
 
-
             $statement = $this->pdo->prepare('DELETE FROM events WHERE id = :id');
             $statement->bindParam(':id',$id);
             return $statement->execute();
