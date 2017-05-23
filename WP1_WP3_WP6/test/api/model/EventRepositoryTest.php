@@ -158,10 +158,45 @@ class EventRepositoryTest extends TestCase
     /**
      * Test to successfully get an event by ID if it exists
      */
-    function test_getEventByID_SuccessfullGetEvent(){
-        
+    function test_getEventByID_SuccessfullyGetEvent(){
+        //Create an event
+        $newEvent = $this->makeEvent("TEST");
+
+        //add it to the DB
+        $rowChanged = $this->_repository->storeEvent($newEvent);
+        self::assertEquals(1, $rowChanged);
+
+        //GetIDOfTheNewEvent
+        $newEventID = $this->getIDOfTestEvent($this->_repository->getAllEvents(), "TEST");
+
+        //Get the even from the DB by ID.
+        $eventFromDB = $this->_repository->getEventByID($newEventID);
+        self::assertEquals([$eventFromDB[0]->title, $eventFromDB[0]->start_date], [$newEvent->title,$newEvent->start_date]);
+
+        //Delete the test event
+        $rowChanged = $this->_repository->deleteEvent($newEventID);
+        self::assertEquals(1, $rowChanged);
     }
 
+
+    /**
+     * Test to successfully get an event between Dates
+     */
+    function test_getEventByOwnerID_SuccessfullyGetEvent(){
+        //Make new event
+        $newEvent = $this->makeEvent("TEST");
+
+        //store the new event
+        $rowChanged = $this->_repository->storeEvent($newEvent);
+        self::assertEquals(1, $rowChanged);
+
+        //get the event by ownerID
+        $eventFromDB = $this->_repository->getEventByOwnerId($newEvent->event_ownerId);
+
+        $count = sizeof($this->_repository->getAllEvents());
+        //Assert if it is the same event
+        self::assertEquals([$newEvent->title, $newEvent->start_date], [$eventFromDB[$count-1]->title, $eventFromDB[$count-1]->start_date]);
+    }
 
     /**
      * Helper functions
@@ -191,7 +226,7 @@ class EventRepositoryTest extends TestCase
         $event->start_date = date('Y-m-d H:i:s');
         $event->organiser = "organiser" . $variable;
         $event->title = "title" . $variable;
-        $event->event_ownerId = intval($variable);
+        $event->event_ownerId = 0;
         return $event;
 
     }
