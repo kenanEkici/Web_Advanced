@@ -3,12 +3,12 @@
 use PDO;
 use PDOException;
 
-class EventRepository
+class EventRepository implements IEventRepository
 {
     private
         $pdo = null;
 
-    function __construct(PDO $pdo)
+    function __construct($pdo)
     {
         $this->pdo = $pdo;
     }
@@ -44,8 +44,6 @@ class EventRepository
         }
     }
 
-
-
     function getEventByID($eventID)
     {
         try {
@@ -78,17 +76,18 @@ class EventRepository
         }
     }
 
-    function getEventByDate($from, $until)
+    function getEventByDate($from, $until) // "yyyy-mm-dd'
     {
         try {
-
-            $statement = $this->pdo->prepare('SELECT * FROM events WHERE start_date <= :start and end_date >= :end ');
-            $statement->bindParam(':start',str_replace("%"," ", $from));
-            $statement->bindParam(':end', str_replace("%"," ", $until));
+            $start  = $from . " 00:00:00";
+            $end = $until . " 00:00:00";
+            $statement = $this->pdo->prepare('SELECT * FROM events WHERE start_date >= :start and end_date <= :eind ');
+            $statement->bindParam(':start', $start);
+            $statement->bindParam(':eind', $end);
             $statement->execute();
             $result_array = $statement->fetchAll(PDO::FETCH_CLASS,__NAMESPACE__ . "\\Event");
-            return $result_array;
 
+            return $result_array;
         } catch
         (PDOException $e) {
             print 'Exception!: ' . $e->getMessage();
@@ -99,10 +98,13 @@ class EventRepository
     {
         try {
 
-            $statement = $this->pdo->prepare('SELECT * FROM events WHERE event_ownerId == :owner_id and start_date <= :start and end_date >= :end ');
-            $statement->bindParam(':owner_id',$personID);
-            $statement->bindParam(':start',str_replace("%"," ", $from));
-            $statement->bindParam(':end', str_replace("%"," ", $until));
+            $start  = $from . " 00:00:00";
+            $end = $until . " 00:00:00";
+
+            $statement = $this->pdo->prepare('SELECT * FROM events WHERE event_ownerId = :personid and start_date >= :start and end_date <= :eind');
+            $statement->bindParam(':personid', $personID);
+            $statement->bindParam(':start',$start);
+            $statement->bindParam(':eind', $end);
             $statement->execute();
             $result_array = $statement->fetchAll(PDO::FETCH_CLASS,__NAMESPACE__ . "\\Event");
             return $result_array;

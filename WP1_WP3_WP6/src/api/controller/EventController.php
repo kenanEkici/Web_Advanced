@@ -1,16 +1,16 @@
 <?php namespace controller;
 
 use model\Event;
-use model\EventRepository;
+use model\IEventRepository;
 
 class EventController
 {
 
     private $EventRepository;
 
-    function __construct($pdo)
+    function __construct(IEventRepository $eventRepository)
     {
-        $this->EventRepository =  new EventRepository($pdo);
+        $this->EventRepository =  $eventRepository;
     }
 
     //Get Function
@@ -18,11 +18,7 @@ class EventController
     {
         $events = $this->EventRepository->getAllEvents();
         echo json_encode($events);
-
-
     }
-
-
 
     public function getAllUsers()
     {
@@ -85,6 +81,7 @@ class EventController
         }
     }
 
+    //CRUD functions don't have any output, so I can only test if they are calling the repository.
     public function postEvent($newEvent)
     {
        $event = new Event();
