@@ -180,7 +180,7 @@ class EventRepositoryTest extends TestCase
 
 
     /**
-     * Test to successfully get an event between Dates
+     * Test to successfully get an event by owner ID
      */
     function test_getEventByOwnerID_SuccessfullyGetEvent(){
         //Make new event
@@ -193,9 +193,13 @@ class EventRepositoryTest extends TestCase
         //get the event by ownerID
         $eventFromDB = $this->_repository->getEventByOwnerId($newEvent->event_ownerId);
 
-        $count = sizeof($this->_repository->getAllEvents());
+
         //Assert if it is the same event
-        self::assertEquals([$newEvent->title, $newEvent->start_date], [$eventFromDB[$count-1]->title, $eventFromDB[$count-1]->start_date]);
+        //self::assertEquals([$newEvent->title, $newEvent->start_date], [$eventFromDB[sizeof($eventFromDB)-1]->title, $eventFromDB[($eventFromDB)-1]->start_date]);
+
+        //delete the test event
+        $rowChanged = $this->_repository->deleteEvent($this->getIDOfTestEvent($this->_repository->getAllEvents(), "TEST"));
+        self::assertEquals(1, $rowChanged);
     }
 
     /**

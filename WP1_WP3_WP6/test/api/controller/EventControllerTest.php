@@ -19,10 +19,10 @@ class EventControllerTest extends TestCase
 {
     private $mockEventRepository;
 
-
     public function setUp()
     {
-        //$this->mockEventRepository = $this->getMockBuilder('model\EventRepository')->getMock();
+
+        $this->mockEventRepository = $this->getMockBuilder('model\IEventRepository')->getMock();
     }
 
     public function tearDown()
@@ -52,19 +52,9 @@ class EventControllerTest extends TestCase
      */
     function test_getAllEvents_SingleElementInDatabase_returnsEvent()
     {
-        $user = "web07_db";
-        $password = "web07";
-        $database = "web07_db";
-        $hostname = "213.136.26.180";
-        $pdo = null;
-
-
-        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $events = $this->makeEvent("55");
 
-        $this->mockEventRepository = $this->getMockBuilder('model\IEventRepository')->getMock();
         $this->mockEventRepository->expects($this->atLeastOnce())->method('getAllEvents')->will($this->returnValue($events));
 
         $EventController = new EventController($this->mockEventRepository);
@@ -80,15 +70,6 @@ class EventControllerTest extends TestCase
      */
     function test_getAllEvents_EmptyDatabase_returnsNULL()
     {
-        $user = "web07_db";
-        $password = "web07";
-        $database = "web07_db";
-        $hostname = "213.136.26.180";
-        $pdo = null;
-
-
-        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $events = null;
 
@@ -107,13 +88,6 @@ class EventControllerTest extends TestCase
      */
     function test_getAllEvents_multipleElementsInDatabase_returnsArrayOfEvents()
     {
-        $user = "web07_db";
-        $password = "web07";
-        $database = "web07_db";
-        $hostname = "213.136.26.180";
-        $pdo = null;
-        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $event1 = $this->makeEvent("1");
         $event2 = $this->makeEvent("2");
@@ -137,15 +111,7 @@ class EventControllerTest extends TestCase
      */
     function test_getEventById_EventFound_returnsEvent()
     {
-        $user = "web07_db";
-        $password = "web07";
-        $database = "web07_db";
-        $hostname = "213.136.26.180";
-        $pdo = null;
 
-
-        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $event = $this->makeEvent("10");
 
@@ -163,15 +129,7 @@ class EventControllerTest extends TestCase
      */
     function test_getEventById_EventNotFound_returnsErrorString()
     {
-        $user = "web07_db";
-        $password = "web07";
-        $database = "web07_db";
-        $hostname = "213.136.26.180";
-        $pdo = null;
 
-
-        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $event = [];
 
@@ -189,15 +147,7 @@ class EventControllerTest extends TestCase
      */
     function test_getEventByOwnerId_EventFound_returnsEvent()
     {
-        $user = "web07_db";
-        $password = "web07";
-        $database = "web07_db";
-        $hostname = "213.136.26.180";
-        $pdo = null;
 
-
-        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $event = $this->makeEvent("10");
 
@@ -215,15 +165,7 @@ class EventControllerTest extends TestCase
      */
     function test_getEventByOwnerId_EventNotFound_returnsErrorString()
     {
-        $user = "web07_db";
-        $password = "web07";
-        $database = "web07_db";
-        $hostname = "213.136.26.180";
-        $pdo = null;
 
-
-        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $event = [];
 
@@ -242,13 +184,6 @@ class EventControllerTest extends TestCase
     function test_getEventsByDate_EventsFound_ReturnsListOfEvents()
     {
 
-        $user = "web07_db";
-        $password = "web07";
-        $database = "web07_db";
-        $hostname = "213.136.26.180";
-        $pdo = null;
-        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $event1 = $this->makeEvent("1");
         $event2 = $this->makeEvent("2");
@@ -271,15 +206,6 @@ class EventControllerTest extends TestCase
      */
     function test_getEventsByDate_EventNotFound_returnsErrorString()
     {
-        $user = "web07_db";
-        $password = "web07";
-        $database = "web07_db";
-        $hostname = "213.136.26.180";
-        $pdo = null;
-
-
-        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $event = [];
 
@@ -297,13 +223,7 @@ class EventControllerTest extends TestCase
      */
     function test_getEventsByPersonAndDate_EventsFound_ReturnsListOfEvents()
     {
-        $user = "web07_db";
-        $password = "web07";
-        $database = "web07_db";
-        $hostname = "213.136.26.180";
-        $pdo = null;
-        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 
         $event1 = $this->makeEvent("1");
         $event2 = $this->makeEvent("2");
@@ -325,13 +245,7 @@ class EventControllerTest extends TestCase
      */
     function test_getEventsByPersonAndDate_EventsNotFound_ReturnsErrorString()
     {
-        $user = "web07_db";
-        $password = "web07";
-        $database = "web07_db";
-        $hostname = "213.136.26.180";
-        $pdo = null;
-        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 
 
         $events = [];
@@ -351,13 +265,7 @@ class EventControllerTest extends TestCase
      */
     function test_PostEvent_EventChanged_ReturnsAmountOfRowsChanged()
     {
-        $user = "web07_db";
-        $password = "web07";
-        $database = "web07_db";
-        $hostname = "213.136.26.180";
-        $pdo = null;
-        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 
         $event1 = $this->makeEvent("1");
         $events = json_encode($event1);
@@ -375,13 +283,7 @@ class EventControllerTest extends TestCase
      */
     function test_PostEvent_EventNotChanged_ReturnsErrorString()
     {
-        $user = "web07_db";
-        $password = "web07";
-        $database = "web07_db";
-        $hostname = "213.136.26.180";
-        $pdo = null;
-        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 
         $event1 = $this->makeEvent("1");
         $events = json_encode($event1);
@@ -401,13 +303,7 @@ class EventControllerTest extends TestCase
      */
     function test_PutEvent_EventChanged_ReturnsAmountOfRowsChanged()
     {
-        $user = "web07_db";
-        $password = "web07";
-        $database = "web07_db";
-        $hostname = "213.136.26.180";
-        $pdo = null;
-        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 
         $event1 = $this->makeEvent("1");
         $events = json_encode($event1);
@@ -426,13 +322,7 @@ class EventControllerTest extends TestCase
      */
     function test_PutEvent_EventNotChanged_ReturnsErrorString()
     {
-        $user = "web07_db";
-        $password = "web07";
-        $database = "web07_db";
-        $hostname = "213.136.26.180";
-        $pdo = null;
-        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 
         $event1 = $this->makeEvent("1");
         $events = json_encode($event1);
@@ -446,14 +336,12 @@ class EventControllerTest extends TestCase
         $this->expectOutputString(sprintf("%s", 'Error while updating the event'));
     }
 
+    /**
+     * deleteEvent($eventID)
+     * Testing if the controller returns the amount of rows changed after deleting the event.
+     */
     function test_DeleteEvent_EventChanged_returnsAmountOfRowsChanged(){
-        $user = "web07_db";
-        $password = "web07";
-        $database = "web07_db";
-        $hostname = "213.136.26.180";
-        $pdo = null;
-        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 
         $event1 = $this->makeEvent("1");
         $this->mockEventRepository = $this->getMockBuilder('model\IEventRepository')->getMock();
@@ -465,14 +353,12 @@ class EventControllerTest extends TestCase
         $this->expectOutputString(sprintf("%s", '1'));
     }
 
+    /**
+     * deleteEvent($eventID)
+     * Testing if the controller returns an errortext when the event can not be deleted.
+     */
     function test_DeleteEvent_EventNotChanged_ReturnsErrorString(){
-        $user = "web07_db";
-        $password = "web07";
-        $database = "web07_db";
-        $hostname = "213.136.26.180";
-        $pdo = null;
-        $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 
         $event1 = $this->makeEvent("1");
         $this->mockEventRepository = $this->getMockBuilder('model\IEventRepository')->getMock();
