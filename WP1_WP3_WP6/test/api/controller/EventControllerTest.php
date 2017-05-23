@@ -239,6 +239,8 @@ class EventControllerTest extends \PHPUnit\Framework\TestCase
      * getEventBetweenDatzes(int $ownerID)
      *
      */
-    function test_getEventsBetweenDates_EventNotFound_returns()
+    function test_getEventsBetweenDates_EventNotFound_returns(){
+        
+    }
 
 }

@@ -6,32 +6,17 @@ use model\Event;
 
 $router = new AltoRouter();
 
-
-//WERKPAKKET 6 database configs
-
-//getting database configs from json file
-$getJsonData = file_get_contents("src/api/database/database_configs.json");
-
-//decode the data we get from json
-$decodedJsonData = json_decode($getJsonData,true);
-$user = $decodedJsonData['database'][0]['user'];
-$password = $decodedJsonData['database'][0]['password'];
-$database = $decodedJsonData['database'][0]['database_name'];
-$hostname = $decodedJsonData['database'][0]['hostname'];
-
-
-// WERKPAKKET 1 database configs
-/*$user = "web07_db";
+$user = "web07_db";
 $password = "web07";
 $database = "web07_db";
 $hostname = "213.136.26.180";
-$pdo = null;*/
+$pdo = null;
 
 
 $pdo = new PDO("mysql:host=$hostname;dbname=$database", $user, $password);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-$eventController = new EventController($pdo);
+$eventRepository = new \model\EventRepository($pdo);
+$eventController = new EventController($eventRepository);
 
 $router->setBasePath('');
 
@@ -57,16 +42,16 @@ $router->map('GET', '/events/person/[i:personId]',
         $eventController->getEventsByOwnerId($personId);
     });
 
-//GetByDate
-$router->map('GET', '/events/[*:fromDate]/[*:untilDate]',
-    function ($fromDate, $untilDate) use (&$eventController) {
-        $eventController->getEventsByDate($fromDate, $untilDate);
-    });
-
 //GetByPersonAndDate
-$router->map('GET', '/events/person/[i:personId]/[*:fromDate]/[*:untilDate]',
+$router->map('GET', '/events/person/[:personId]/[:fromDate]/[:untilDate]',
     function ($personId, $fromDate, $untilDate) use (&$eventController) {
         $eventController->getEventsByPersonAndDate($personId, $fromDate, $untilDate);
+    });
+
+//GetByDate
+$router->map('GET', '/events/[:fromDate]/[:untilDate]',
+    function ($fromDate, $untilDate) use (&$eventController) {
+        $eventController->getEventsByDate($fromDate, $untilDate);
     });
 
 //POST
@@ -105,6 +90,3 @@ if( $match && is_callable( $match['target'] ) ){
 else {
     header("HTTP/1.0 404 Not Found");
 }
-
-
-

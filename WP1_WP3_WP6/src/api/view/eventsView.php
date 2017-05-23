@@ -12,10 +12,16 @@ echo
 <div id='nav'>
 <h3>Zoeken naar event</h3>
 
-<label>Zoeken op: </label><select id='select'><option>Event Id</option><option>Owner Id</option></select>
-<input id='idInput' type='number'>
+<label>Zoeken op: </label><select id='select'><option>Event Id</option><option>Owner Id</option><option>Between dates</option><option>Owner ID and between dates</option></select>
+<input id='idInput' type='number' min='1' max='999'>
+<div id='dateDiv'>
+    <label style='float: left'>Startdatum:</label><input id='startDateInput' type='date'>
+    <label style='float: left'>Einddatum: </label><input id='endDateInput' type='date'>
+</div>
+
 <input id='fetchButton' onclick='fetchData()' value='Haal op' type='button'>
 <input id='addButton' onclick='openExtraWindow()' value='Voeg toe' type='button'>
+
 <form method='post' name='event' action='/events'>
 <div id='hiddenForm' hidden >
 <label>Titel</label>
@@ -32,6 +38,8 @@ echo
 <input id='location' type='text'><br>
 <label>Invited Coworkers</label>
 <input id='invited' type='text'><br>
+<label>Event Owner Id</label>
+<input id='event_ownerId' type='text'>
 <input type='button' onclick='postData()' value='Voeg toe'>
 </form>
 </div>
@@ -47,6 +55,7 @@ echo
             <th>End date</th>
             <th>Location</th>
             <th>Invited coworkers</th>
+            <th>Event Owner Id</th>
          </tr></thead>
          <tbody id='contentBody'>            
          </tbody>        
