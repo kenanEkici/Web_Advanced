@@ -10,10 +10,10 @@ echo
 <body>
 
 <div id='nav'>
-<h3>Zoeken naar event</h3>
+    <h3>Zoeken naar event</h3>
 
-<label>Zoeken op: </label><select id='select'><option>Event Id</option><option>Owner Id</option><option>Between dates</option><option>Owner ID and between dates</option></select>
-<input id='idInput' type='number' min='1' max='999'>
+    <label>Zoeken op: </label><select id='select'><option>Event Id</option><option>Owner Id</option><option>Between dates</option><option>Owner ID and between dates</option></select>
+    <input id='idInput' type='number' placeholder='Geef ID in' min='1' max='999'>
 <div id='dateDiv'>
     <label>Startdatum:<input id='startDateInput' type='date'></label>
     <label>Einddatum:<input id='endDateInput' type='date'></label>
@@ -22,27 +22,28 @@ echo
 <input id='fetchButton' onclick='fetchData()' value='Haal events op' type='button'>
 <input id='addButton' onclick='openExtraWindow()' value='Voeg events toe' type='button'>
 
-<form method='post' name='event' action='/events'>
-<div id='hiddenForm' hidden >
-<label>Titel</label>
-<input id='title'  type='text'><br>
-<label >Organiser</label>
-<input id='organiser' type='text'><br>
-<label>Description</label>
-<input id='description' type='text'><br>
-<label>Start Date</label>
-<input id='startDate' type='date'><br>
-<label>End Date</label>
-<input id='endDate' type='date'><br>
-<label>Location</label>
-<input id='location' type='text'><br>
-<label>Invited Coworkers</label>
-<input id='invited' type='text'><br>
-<label>Event Owner Id</label>
-<input id='event_ownerId' type='text'>
-<input type='button' onclick='postData()' value='Voeg toe'>
-</form>
-</div>
+    <form method='post' name='event' action='/events'>
+            <div id='hiddenForm' hidden >
+            <label>Titel</label>
+            <input id='title'  type='text'><br>
+            <label >Organiser</label>
+            <input id='organiser' type='text'><br>
+            <label>Description</label>
+            <input id='description' type='text'><br>
+            <label>Start Date</label>
+            <input id='startDate' type='date'><br>
+            <label>End Date</label>
+            <input id='endDate' type='date'><br>
+            <label>Location</label>
+            <input id='location' type='text'><br>
+            <label>Invited Coworkers</label>
+            <input id='invited' type='text'><br>
+            <label>Event Owner Id</label>
+            <input id='event_ownerId' type='text'>
+            <input type='button' onclick='postData()' value='Voeg toe'>
+            
+            </div>
+    </form>
 </div>
 
 <div class='container'>

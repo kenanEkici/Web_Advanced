@@ -13,14 +13,14 @@ class EventController
         $this->EventRepository =  $eventRepository;
     }
 
-    //Get Function
+    //get and encode all evenst to json
     public function getAllEvents()
     {
         $events = $this->EventRepository->getAllEvents();
         echo json_encode($events);
     }
 
-
+    //get and encode get events by id to json
     public function getEventById($eventId)
     {
         $event = $this->EventRepository->getEventByID($eventId);
@@ -35,6 +35,7 @@ class EventController
         }
     }
 
+    //get and encode owner id to json
     public function getEventsByOwnerId($personId)
     {
         $event = $this->EventRepository->getEventByOwnerId($personId);
@@ -49,6 +50,7 @@ class EventController
         }
     }
 
+    // get and encode events by date to json
     public function getEventsByDate($fromDate, $untilDate)
     {
         $event = $this->EventRepository->getEventByDate($fromDate, $untilDate);
@@ -63,7 +65,8 @@ class EventController
         }
     }
 
-    public function getEventByPersonAndDate($personId, $fromDate, $untilDate)
+    // get and encode events by owner id, start_date and end_date
+    public function getEventsByPersonAndDate($personId, $fromDate, $untilDate)
     {
         $event = $this->EventRepository->getEventByPersonAndDate($personId,$fromDate,$untilDate);
 
@@ -77,6 +80,7 @@ class EventController
         }
     }
 
+    // decode event from json and send to eventRepository to insert into database
     public function postEvent($newEvent)
     {
        $event = new Event();
@@ -100,7 +104,7 @@ class EventController
       }
 
     }
-
+    // decode event from json and sed to eventrepository to change the event in the database
     public function putEvent($id, $newEvent)
     {
         $updatedEvent = new Event();
@@ -123,7 +127,7 @@ class EventController
             echo "Error while updating the event";
         }
     }
-
+    // Delete event
     public function deleteEvent($id)
     {
         $rowsChanged = $this->EventRepository->deleteEvent($id);

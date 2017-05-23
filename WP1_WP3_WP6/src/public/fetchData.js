@@ -55,8 +55,7 @@ function fetchData() {
         });
     }
     else if ($("#select").val() == "Owner ID and between dates") {
-        //alert('Owner ID and between dates : startDate = ' + startDate + ' endDate : ' + endDate + ' personId: ' + idValue);
-        alert(url + '/events/person/' + idValue + '/' + startDate + '/' + endDate);
+
         fetch(url + '/events/person/' + idValue + '/' + startDate + '/' + endDate,{
             method: 'get'
         }).then(function (response) {

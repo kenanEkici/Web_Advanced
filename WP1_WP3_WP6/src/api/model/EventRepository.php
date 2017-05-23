@@ -28,7 +28,7 @@ class EventRepository implements IEventRepository
         }
     }
 
-
+    // get events by it from the database
     function getEventByID($eventID)
     {
         try {
@@ -45,6 +45,7 @@ class EventRepository implements IEventRepository
         }
     }
 
+    //get events by owner id from the database
     function getEventByOwnerId($personID)
     {
         try {
@@ -60,6 +61,7 @@ class EventRepository implements IEventRepository
         }
     }
 
+    // get events by date from the database
     function getEventByDate($from, $until) // "yyyy-mm-dd'
     {
         try {
@@ -78,9 +80,11 @@ class EventRepository implements IEventRepository
         }
     }
 
+    // get events by person and date from the database
     function getEventByPersonAndDate($personID, $from, $until)
     {
         try {
+
 
             $start  = $from . " 00:00:00";
             $end = $until . " 00:00:00";
@@ -99,6 +103,7 @@ class EventRepository implements IEventRepository
         }
     }
 
+    // POST event into Database
     function storeEvent($event)
     {
         try {
@@ -123,6 +128,7 @@ class EventRepository implements IEventRepository
         }
     }
 
+    // PUT == Change event in the database by id
     function editEvent($id, $updatedEvent)
     {
         try {
@@ -147,6 +153,7 @@ class EventRepository implements IEventRepository
         }
     }
 
+    // Delete event from database
     function deleteEvent($id)
     {
         try {
